@@ -1,0 +1,694 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Automa Labs — Módulo de Consultoria Comercial</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0C0E14;
+  --surface: #13161F;
+  --surface2: #1C2030;
+  --border: rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.13);
+  --text: #F0F2F8;
+  --muted: #5A6170;
+  --muted2: #9CA3AF;
+  --diagnostico: #3B82F6;
+  --qualificacao: #10B981;
+  --processo: #F59E0B;
+  --comunicacao: #EC4899;
+  --gestao: #8B5CF6;
+  --vendas: #06B6D4;
+  --tempo: #F59E0B;
+  --performance: #EF4444;
+  --evento: #10B981;
+  --aprovacao: #8B5CF6;
+  --onboarding: #3B82F6;
+  --crm: #06B6D4;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; font-size: 15px; }
+
+/* NAV */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(12,14,20,0.94);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 48px;
+  display: flex; align-items: center; gap: 4px;
+  height: 54px;
+}
+.nav-brand { font-weight: 900; font-size: 14px; color: var(--text); letter-spacing: -0.02em; margin-right: 20px; white-space: nowrap; }
+.nav-brand span { color: var(--diagnostico); }
+nav a { color: var(--muted2); text-decoration: none; font-size: 13px; font-weight: 500; padding: 5px 11px; border-radius: 6px; transition: all 0.15s; white-space: nowrap; }
+nav a:hover { color: var(--text); background: var(--surface2); }
+.nav-sep { width: 1px; height: 18px; background: var(--border2); margin: 0 6px; }
+.nav-pill { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 8px; border-radius: 20px; margin-left: auto; background: rgba(59,130,246,0.12); color: var(--diagnostico); }
+
+/* HERO */
+.hero { padding: 80px 48px 64px; max-width: 1200px; margin: 0 auto; }
+.hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.26em; text-transform: uppercase; color: var(--diagnostico); margin-bottom: 18px; }
+.hero h1 { font-size: 72px; font-weight: 900; letter-spacing: -0.04em; line-height: 0.96; margin-bottom: 24px; }
+.hero h1 .grad { background: linear-gradient(120deg, var(--diagnostico) 0%, var(--comunicacao) 60%, var(--processo) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero-sub { font-size: 17px; color: var(--muted2); max-width: 560px; line-height: 1.65; margin-bottom: 48px; font-weight: 400; }
+.stats-row { display: flex; gap: 0; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; max-width: 640px; }
+.stat { flex: 1; padding: 20px 24px; border-right: 1px solid var(--border); }
+.stat:last-child { border-right: none; }
+.stat-num { font-size: 36px; font-weight: 900; letter-spacing: -0.04em; line-height: 1; }
+.stat-label { font-size: 11px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; margin-top: 4px; }
+
+/* DIVIDER */
+.page-divider { height: 1px; background: var(--border); margin: 0 48px; }
+
+/* SECTION */
+.section { padding: 72px 48px; max-width: 1200px; margin: 0 auto; }
+.section-header { margin-bottom: 52px; }
+.section-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.26em; text-transform: uppercase; margin-bottom: 10px; }
+.section h2 { font-size: 44px; font-weight: 900; letter-spacing: -0.035em; line-height: 1.08; }
+.section-sub { font-size: 15px; color: var(--muted2); margin-top: 10px; max-width: 520px; }
+
+/* CATEGORY */
+.category { margin-bottom: 60px; }
+.cat-header { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+.cat-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.cat-title { font-size: 18px; font-weight: 800; letter-spacing: -0.02em; }
+.cat-count { font-size: 11px; font-weight: 600; color: var(--muted); background: var(--surface2); border: 1px solid var(--border); padding: 2px 9px; border-radius: 20px; margin-left: auto; }
+
+/* CARDS */
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 14px; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 22px; position: relative; overflow: hidden; transition: border-color 0.2s, transform 0.2s; }
+.card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; }
+.card:hover { border-color: var(--border2); transform: translateY(-1px); }
+.card-skills { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 11px; }
+.skill-tag { display: inline-block; font-size: 10px; font-weight: 700; font-family: 'Courier New', monospace; padding: 2px 7px; border-radius: 4px; }
+.card-title { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 7px; letter-spacing: -0.01em; line-height: 1.35; }
+.card-desc { font-size: 12.5px; color: var(--muted2); line-height: 1.6; }
+
+/* Category color variants */
+.c-diagnostico .card::before { background: var(--diagnostico); }
+.c-diagnostico .skill-tag { background: rgba(59,130,246,0.13); color: var(--diagnostico); }
+
+.c-qualificacao .card::before { background: var(--qualificacao); }
+.c-qualificacao .skill-tag { background: rgba(16,185,129,0.13); color: var(--qualificacao); }
+
+.c-processo .card::before { background: var(--processo); }
+.c-processo .skill-tag { background: rgba(245,158,11,0.13); color: var(--processo); }
+
+.c-comunicacao .card::before { background: var(--comunicacao); }
+.c-comunicacao .skill-tag { background: rgba(236,72,153,0.13); color: var(--comunicacao); }
+
+.c-gestao .card::before { background: var(--gestao); }
+.c-gestao .skill-tag { background: rgba(139,92,246,0.13); color: var(--gestao); }
+
+.c-vendas .card::before { background: var(--vendas); }
+.c-vendas .skill-tag { background: rgba(6,182,212,0.13); color: var(--vendas); }
+
+/* AUTOMATION BLOCKS */
+.auto-block { margin-bottom: 44px; }
+.auto-header { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.trigger-badge { font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; padding: 4px 11px; border-radius: 20px; }
+.auto-title { font-size: 17px; font-weight: 800; letter-spacing: -0.02em; }
+
+.t-tempo { background: rgba(245,158,11,0.13); color: var(--tempo); }
+.t-performance { background: rgba(239,68,68,0.13); color: var(--performance); }
+.t-evento { background: rgba(16,185,129,0.13); color: var(--evento); }
+.t-aprovacao { background: rgba(139,92,246,0.13); color: var(--aprovacao); }
+.t-onboarding { background: rgba(59,130,246,0.13); color: var(--onboarding); }
+.t-crm { background: rgba(6,182,212,0.13); color: var(--crm); }
+
+.auto-table { width: 100%; border-collapse: collapse; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+.auto-table thead tr { border-bottom: 1px solid var(--border); }
+.auto-table th { padding: 11px 18px; text-align: left; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.16em; color: var(--muted); background: var(--surface); }
+.auto-table tbody tr { border-bottom: 1px solid var(--border); transition: background 0.12s; }
+.auto-table tbody tr:last-child { border-bottom: none; }
+.auto-table tbody tr:hover { background: var(--surface2); }
+.auto-table td { padding: 13px 18px; font-size: 13px; vertical-align: top; line-height: 1.5; }
+.auto-table td.td-skill { font-family: 'Courier New', monospace; font-size: 11px; font-weight: 700; white-space: nowrap; }
+.auto-table td.td-when { color: var(--muted2); font-size: 12px; white-space: nowrap; }
+.auto-table td.td-what { color: var(--text); }
+.auto-table td.td-order { font-weight: 800; font-size: 22px; color: var(--muted); letter-spacing: -0.03em; width: 52px; }
+
+.skill-pill { display: inline-block; font-family: 'Courier New', monospace; font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px; background: var(--surface2); color: var(--muted2); border: 1px solid var(--border); white-space: nowrap; margin: 1px; }
+
+/* FLOW */
+.flow-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 48px; }
+.flow-title { font-size: 18px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 8px; text-align: center; }
+.flow-sub { font-size: 13px; color: var(--muted2); text-align: center; margin-bottom: 48px; }
+.flow-pipeline { display: flex; flex-direction: column; max-width: 660px; margin: 0 auto; }
+.flow-step { display: flex; gap: 18px; position: relative; }
+.flow-step:not(:last-child)::after { content: ''; position: absolute; left: 19px; top: 44px; bottom: -16px; width: 2px; background: linear-gradient(to bottom, var(--border2), var(--border)); }
+.flow-icon { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 17px; flex-shrink: 0; border: 1px solid var(--border2); background: var(--surface2); z-index: 1; margin-top: 2px; }
+.flow-body { padding-bottom: 32px; flex: 1; }
+.flow-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; color: var(--muted); margin-bottom: 3px; }
+.flow-action { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+.flow-detail { font-size: 12px; color: var(--muted2); line-height: 1.55; margin-bottom: 8px; }
+.flow-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+
+/* FOOTER */
+footer { padding: 36px 48px; text-align: center; color: var(--muted); font-size: 12px; border-top: 1px solid var(--border); }
+footer strong { color: var(--muted2); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">Automa<span>Labs</span> — Comercial</div>
+  <a href="#entregaveis">Entregáveis</a>
+  <a href="#automacoes">Automações</a>
+  <a href="#fluxo">Fluxo Completo</a>
+  <div class="nav-sep"></div>
+  <a href="#diagnostico">Diagnóstico</a>
+  <a href="#qualificacao">Qualificação</a>
+  <a href="#processo">Processo</a>
+  <a href="#comunicacao">Comunicação</a>
+  <a href="#gestao">Gestão</a>
+  <div class="nav-pill">v1.0 — 2026</div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Automa Labs — Módulo de Consultoria Comercial</div>
+  <h1>Uma operação comercial<br>construída para <span class="grad">fechar.</span></h1>
+  <p class="hero-sub">Do diagnóstico ao forecast semanal — skills que estruturam o processo, armam a equipe com scripts e frameworks, e mantêm o pipeline saudável com revisões automáticas.</p>
+</div>
+
+<div class="page-divider"></div>
+
+<!-- ==================== ENTREGÁVEIS ==================== -->
+<div class="section" id="entregaveis">
+  <div class="section-header">
+    <div class="section-eyebrow" style="color:var(--diagnostico)">01 — Entregáveis</div>
+    <h2>O que o sistema produz</h2>
+    <p class="section-sub">Cada skill conduz uma entrevista interativa e gera documentos prontos para entregar ao cliente — sem template vazio, sem rascunho.</p>
+  </div>
+
+  <!-- DIAGNÓSTICO -->
+  <div class="category c-diagnostico" id="diagnostico">
+    <div class="cat-header">
+      <div class="cat-dot" style="background:var(--diagnostico)"></div>
+      <div class="cat-title" style="color:var(--diagnostico)">Diagnóstico</div>
+      <div class="cat-count">8 entregáveis</div>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/comercial-diagnostico</span></div>
+        <div class="card-title">Diagnóstico completo da operação comercial</div>
+        <div class="card-desc">Entrevista estruturada em 5 blocos — contexto da empresa, estrutura atual, análise do funil, gaps e visão de futuro. Gera documento com mapa do estado atual, tabela de conversão por etapa, matriz de maturidade comercial (7 dimensões, nota 1-5) e roadmap de 0 a 180 dias.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/comercial-diagnostico</span></div>
+        <div class="card-title">Análise de funil com taxas de conversão</div>
+        <div class="card-desc">Tabela com taxa de conversão em cada etapa (lead → oportunidade → proposta → fechamento), principais motivos de perda por frequência e identificação da etapa onde as oportunidades "somem" com mais frequência.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/comercial-diagnostico</span></div>
+        <div class="card-title">Matriz de maturidade comercial</div>
+        <div class="card-desc">Avaliação em 7 dimensões: processo de vendas, qualificação, gestão do funil (CRM), cadência e follow-up, scripts e abordagem, métricas e gestão, treinamento da equipe. Score geral de 1 a 5 com classificação e comentários por dimensão.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/spin-diagnostico</span></div>
+        <div class="card-title">Roteiro SPIN personalizado por prospect</div>
+        <div class="card-desc">Para uso nas calls de venda do cliente — gera roteiro completo com abertura, 5 perguntas de Situação, 6 de Problema, 5 de Implicação e 4 de Necessidade de Solução, todas personalizadas pelo perfil e contexto do prospect. Inclui tabela de objeções prováveis e CTA recomendado.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/spin-diagnostico</span></div>
+        <div class="card-title">Diagnóstico SPIN pós-call</div>
+        <div class="card-desc">Processa as anotações da reunião e gera documento estruturado: situação mapeada, tabela de problemas com intensidade e fonte (prospect vs. inferido), implicações financeiras/operacionais/estratégicas, critérios de decisão articulados, análise de fit em 5 dimensões e recomendação de como estruturar a proposta.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/spin-diagnostico</span></div>
+        <div class="card-title">Score de oportunidade com análise de fit</div>
+        <div class="card-desc">Tabela de fit com 5 critérios avaliados (dor alinhada, autoridade, urgência, budget, processo decisório), score geral Alta/Média/Baixa e recomendação de abordagem para a proposta baseada no que foi descoberto na call.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/comercial-diagnostico</span></div>
+        <div class="card-title">Gaps críticos categorizados por prazo</div>
+        <div class="card-desc">Gaps separados em três horizontes: Críticos (impacto imediato), Estruturais (médio prazo, 30-90 dias) e de Escala (longo prazo, o que impede crescimento sustentável). Cada gap com justificativa e impacto esperado na operação.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/comercial-diagnostico</span></div>
+        <div class="card-title">Roadmap de recomendações 0–180 dias</div>
+        <div class="card-desc">Ações imediatas (0-30 dias), de médio prazo (30-90 dias) e estruturais (90-180 dias), cada uma com justificativa e impacto esperado. Funciona como plano de trabalho que justifica a continuidade do projeto de consultoria.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUALIFICAÇÃO -->
+  <div class="category c-qualificacao" id="qualificacao">
+    <div class="cat-header">
+      <div class="cat-dot" style="background:var(--qualificacao)"></div>
+      <div class="cat-title" style="color:var(--qualificacao)">Qualificação de Leads</div>
+      <div class="cat-count">5 entregáveis</div>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/qualificacao-leads</span></div>
+        <div class="card-title">Perfil de Cliente Ideal (ICP) documentado</div>
+        <div class="card-desc">Dois perfis integrados: firmográfico (segmento, porte, localização, maturidade tecnológica) e do decisor (cargo, nível, dor principal, motivação de compra). Inclui perfil negativo — os tipos de lead que consomem tempo sem fechar — com motivo explícito para cada.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/qualificacao-leads</span></div>
+        <div class="card-title">Framework BANT adaptado com pesos</div>
+        <div class="card-desc">Tabela de qualificação com Budget, Authority, Need e Timeline adaptados ao negócio, mais critério extra quando necessário. Cada dimensão com peso percentual, pergunta-chave, resposta que qualifica e red flag que desqualifica. Soma 100% — calibrado para a realidade do produto.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/qualificacao-leads</span></div>
+        <div class="card-title">Modelo de Lead Scoring operacional</div>
+        <div class="card-desc">Sistema de pontuação em dois eixos: perfil (fit com ICP) e comportamento (engajamento). Tabela com pontos por critério e classificação em 4 níveis: Hot Lead (80+), Lead Qualificado (50-79), Lead Morno (20-49) e Fora do ICP (abaixo de 20), com ação recomendada para cada nível.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/qualificacao-leads</span></div>
+        <div class="card-title">Roteiro de qualificação com 5 perguntas-chave</div>
+        <div class="card-desc">Script estruturado para conversa de qualificação: abertura recomendada, sequência de 5 perguntas ordenadas por objetivo (situação, dor, urgência, budget/autoridade, confirmação de fit) e critérios de avanço no funil com checklist de 4 pontos obrigatórios.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/qualificacao-leads</span></div>
+        <div class="card-title">Fluxo de qualificação e red flags</div>
+        <div class="card-desc">Diagrama textual do processo (lead entra → scoring → contato → perguntas BANT → decisão de avançar ou desqualificar) com lista de red flags claros para arquivamento ou nurturing. Reforça que lead desqualificado não é lead perdido — inclui instrução de registro no CRM.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROCESSO COMERCIAL -->
+  <div class="category c-processo" id="processo">
+    <div class="cat-header">
+      <div class="cat-dot" style="background:var(--processo)"></div>
+      <div class="cat-title" style="color:var(--processo)">Processo Comercial</div>
+      <div class="cat-count">15 entregáveis</div>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/playbook-comercial</span></div>
+        <div class="card-title">Playbook comercial completo</div>
+        <div class="card-desc">O guia operacional que a equipe usa no dia a dia: proposta de valor em uma frase, top 3 resultados entregues, diferenciais reais (não o que a empresa acha — o que os clientes dizem), provas sociais disponíveis e onde usar cada uma. Base de todo treinamento de novos vendedores.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/playbook-comercial</span></div>
+        <div class="card-title">Funil de vendas com critérios de avanço</div>
+        <div class="card-desc">8 etapas (Prospecção → Primeiro Contato → Qualificação → Diagnóstico → Proposta → Negociação → Fechamento → Handoff), cada uma com descrição, critério de entrada, critério de saída e prazo máximo. Checklist de avanço entre as etapas mais críticas.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/playbook-comercial</span></div>
+        <div class="card-title">Cadência de follow-up com tabela por canal</div>
+        <div class="card-desc">Tabela de 5 tentativas com canal, timing e tipo de ação para prospecção fria. Cadência pós-reunião e pós-proposta separadas. Break-up message final inclusa. Critério de mudança para nurturing quando lead esgota a cadência ativa sem resposta.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/playbook-comercial</span></div>
+        <div class="card-title">Gestão de objeções com tabela de respostas</div>
+        <div class="card-desc">Tabela com as 6 objeções mais comuns do negócio, o que cada uma realmente significa por trás e a resposta recomendada com lógica de re-enquadramento. Formatada para o vendedor decorar e adaptar — não para ler na frente do cliente.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/playbook-comercial</span></div>
+        <div class="card-title">Processo de fechamento e handoff documentado</div>
+        <div class="card-desc">Sinais de compra para identificar quando acelerar, 3 técnicas de fechamento recomendadas com script, processo pós-fechamento (contrato → pagamento → onboarding) e template de briefing de handoff para CS com os 5 campos obrigatórios.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/playbook-comercial</span></div>
+        <div class="card-title">Campos obrigatórios do CRM por etapa</div>
+        <div class="card-desc">Tabela de higiene do CRM: quais campos preencher em cada etapa do funil, do lead criado ao fechado ou perdido. Motivo de perda obrigatório explícito. Base para qualquer implantação de HubSpot, Pipedrive ou planilha estruturada.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/blueprint-comercial</span></div>
+        <div class="card-title">Blueprint do processo de vendas (ponta a ponta)</div>
+        <div class="card-desc">Mapa completo com três linhas por etapa: o que o prospect experimenta (linha do cliente), ações visíveis da equipe (frontstage) e ações de suporte invisíveis (backstage). Inspirado no Service Blueprint — cada ponto com responsável, sistema e entregável.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/blueprint-comercial</span></div>
+        <div class="card-title">Mapa de sistemas e ferramentas por etapa</div>
+        <div class="card-desc">Para cada etapa do processo: ferramenta de input, onde registrar, ferramenta de output e integrações existentes ou necessárias. Identifica gaps onde a informação se perde entre sistemas — base para decisão de CRM e automações.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/blueprint-comercial</span></div>
+        <div class="card-title">Pontos críticos: falhas, atritos e oportunidades</div>
+        <div class="card-desc">Três tabelas: pontos de falha com risco alto (🔴), pontos de atrito para o prospect e como reduzi-los (🟡), e momentos de encantamento a aproveitar (🟢). Diagnóstico de experiência do cliente durante o processo de compra — raramente documentado.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/blueprint-comercial</span></div>
+        <div class="card-title">Roadmap de implementação do blueprint</div>
+        <div class="card-desc">Plano em 3 fases: Fundação (0-30 dias) com papéis, CRM e templates; Operacionalização (30-60 dias) com treinamento e dashboard; e Otimização (60-90 dias) com análise de conversão, correções e versão 2.0.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/activity-flow</span></div>
+        <div class="card-title">Funil reverso — atividades necessárias para bater a meta</div>
+        <div class="card-desc">Cálculo automático: meta de clientes/mês → propostas necessárias → reuniões → leads qualificados → contatos feitos por dia, tudo baseado nas taxas de conversão reais. Tabela com necessário/mês, semana e dia por etapa. Torna a meta abstrata em número de ligações por dia.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/activity-flow</span></div>
+        <div class="card-title">Rotina diária e semanal por papel (SDR, AE, Gestor)</div>
+        <div class="card-desc">Três tabelas de rotina: SDR com bloco a bloco (08h-17h) e meta diária por atividade; AE com blocos de reunião, proposta e follow-up; Gestor com daily (15 min), weekly pipe review (1h) e monthly review (2h). Cada um com KPIs individuais diários, semanais e mensais.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/activity-flow</span></div>
+        <div class="card-title">Tabela de SLA por situação</div>
+        <div class="card-desc">Tempo máximo de resposta por situação: lead inbound, indicação recebida, prospect que respondeu, reunião realizada, proposta solicitada e contrato assinado. Cada linha com SLA e responsável. Base para cobrança de performance sem subjetividade.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/activity-flow</span></div>
+        <div class="card-title">Regras de priorização e higiene do CRM</div>
+        <div class="card-desc">Ordem explícita de priorização do dia (1: deals em negociação, 2: qualificados com reunião, 3: follow-ups, 4: prospecção nova) e regras de higiene: nenhum lead sem próxima ação, limpeza toda sexta, arquivamento com motivo obrigatório.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/playbook-comercial</span><span class="skill-tag">/activity-flow</span></div>
+        <div class="card-title">Métricas individuais e de funil para gestão</div>
+        <div class="card-desc">Dois grupos de métricas: individuais por vendedor (volume de prospecção, taxa de resposta, agendamento, taxa de fechamento, ticket médio, ciclo de venda) e do funil para gestão (leads por etapa, conversão entre etapas, deals parados, forecast). Cadência de revisão definida por frequência.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMUNICAÇÃO -->
+  <div class="category c-comunicacao" id="comunicacao">
+    <div class="cat-header">
+      <div class="cat-dot" style="background:var(--comunicacao)"></div>
+      <div class="cat-title" style="color:var(--comunicacao)">Scripts e Comunicação</div>
+      <div class="cat-count">9 módulos, 30+ scripts</div>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/scripts-whatsapp</span></div>
+        <div class="card-title">Scripts de prospecção fria (3 variações)</div>
+        <div class="card-desc">Script padrão por problema, script por indicação e script por gatilho (crescimento, vaga aberta, mudança de cargo). Cada um com estrutura e lógica explicada — gancho personalizado, relevância, proposta de valor e CTA leve. Curtos, humanos, sem bloco de texto.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/scripts-whatsapp</span></div>
+        <div class="card-title">Cadência de follow-up pós-primeiro contato</div>
+        <div class="card-desc">5 mensagens sequenciadas: follow-up D+2 (sem resposta), D+5 com novo ângulo, D+10 break-up message. Cada script com tom diferente para não parecer robótico. Break-up message que fecha a conversa com elegância e deixa porta aberta para o futuro.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/scripts-whatsapp</span></div>
+        <div class="card-title">Scripts de qualificação pelo WhatsApp</div>
+        <div class="card-desc">Abertura de qualificação para prospect que respondeu com interesse, script delicado de qualificação de budget (com lógica de transparência para não desperdiçar tempo de ninguém) e scripts de agendamento de reunião com duas opções de horário.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/scripts-whatsapp</span></div>
+        <div class="card-title">Confirmação de reunião e gestão de no-show</div>
+        <div class="card-desc">Três scripts: confirmação D-1 (dia anterior), confirmação D-0 (manhã do dia) e no-show (prospect não apareceu sem avisar). Tom natural que confirma sem pressionar. Mensagem de no-show que não agride e facilita o reagendamento.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/scripts-whatsapp</span></div>
+        <div class="card-title">Follow-up pós-reunião e envio de proposta</div>
+        <div class="card-desc">Follow-up imediato até 2h após reunião com resumo dos pontos alinhados, mensagem de envio da proposta que gera expectativa de leitura, e sequência de 3 follow-ups de proposta em D+2, D+5 e D+10 com angulações diferentes — urgência, valor e prazo.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/scripts-whatsapp</span></div>
+        <div class="card-title">Respostas de objeções pelo WhatsApp</div>
+        <div class="card-desc">Scripts para as 4 objeções mais comuns em texto curto: "está caro" (re-enquadra para valor), "preciso pensar" (identifica o bloqueio real), "vou falar com meu sócio" (facilita a conversa interna), "não é o momento" (define timeline). Todos terminam com pergunta aberta.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/scripts-whatsapp</span></div>
+        <div class="card-title">Scripts de fechamento e boas-vindas</div>
+        <div class="card-desc">Acompanhamento de contrato enviado aguardando assinatura e mensagem de boas-vindas após fechamento — tom celebratório que sinaliza profissionalismo e antecipa o próximo passo com o CS. Encerra bem o ciclo comercial e inicia bem o ciclo de entrega.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/scripts-whatsapp</span></div>
+        <div class="card-title">Cadência de reengajamento de leads frios</div>
+        <div class="card-desc">Check-in de 30 dias para leads que pararam de responder e mensagem de reengajamento por gatilho externo (crescimento, notícia, mudança de cargo). Lógica de nutrição de longo prazo para leads que não fecharam mas podem fechar no futuro.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/scripts-whatsapp</span></div>
+        <div class="card-title">Scripts de CS para pós-venda e onboarding</div>
+        <div class="card-desc">Mensagem de boas-vindas do CS para cliente novo (recebe contexto do handoff do AE) e follow-up de onboarding para verificar progresso na implementação. Completa o ciclo do WhatsApp — do primeiro contato ao cliente ativo.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GESTÃO DE PIPELINE -->
+  <div class="category c-gestao" id="gestao">
+    <div class="cat-header">
+      <div class="cat-dot" style="background:var(--gestao)"></div>
+      <div class="cat-title" style="color:var(--gestao)">Gestão de Pipeline</div>
+      <div class="cat-count">6 entregáveis</div>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/avaliador-crm</span></div>
+        <div class="card-title">Análise individual de deals com diagnóstico honesto</div>
+        <div class="card-desc">Para cada deal: diagnóstico de 2-3 linhas sobre o estado real (não o otimista), sinal de alerta 🔴🟡🟢 com razão baseada em evidências concretas — dias sem contato, ausência de decisor, proposta velha, engajamento caindo. Aceita dados em qualquer formato: lista livre, tabela colada do CRM ou relato verbal.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/avaliador-crm</span></div>
+        <div class="card-title">Forecast em 4 categorias com valores</div>
+        <div class="card-desc">Pipeline separado em Commit (fechamento certo), Best Case (possível se tudo correr bem), Pipeline (real mas incerto) e Fora. Três cenários de forecast: conservador (só Commit), realista (Commit + 50% Best Case) e otimista. Alerta automático quando forecast está abaixo da meta com cálculo do gap.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/avaliador-crm</span></div>
+        <div class="card-title">Plano de ação priorizado por urgência</div>
+        <div class="card-desc">Duas tabelas de ação: o que fazer hoje (ação imediata) e o que fazer essa semana, cada linha com deal, ação específica, canal e responsável. Lista separada de deals para desqualificar ou arquivar com motivo. Foco em ação, não em relatório para arquivar.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/avaliador-crm</span></div>
+        <div class="card-title">Score de saúde do pipeline (1-5 em 5 dimensões)</div>
+        <div class="card-desc">Avaliação em cobertura (pipeline total vs. meta), qualidade dos deals (fit com ICP), progresso (deals avançando), higiene (dados atualizados) e equilíbrio entre etapas. Score geral de Crítico a Alta Performance com comentário de 2-3 linhas sobre o que mais precisa de atenção.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/avaliador-crm</span></div>
+        <div class="card-title">Análise de padrões e recomendação de processo</div>
+        <div class="card-desc">Identifica onde os deals estão travando com mais frequência, os padrões de risco recorrentes no pipeline atual (sem decisor, deal velho, sem próximo passo) e 1-2 ajustes de processo recomendados para a semana. Converte o pipeline review em melhoria contínua do processo.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/avaliador-crm</span></div>
+        <div class="card-title">Modo Express — revisão de pipeline em 10 minutos</div>
+        <div class="card-desc">Formato comprimido para quando o tempo é curto: para cada deal, status com emoji + categoria de forecast + próximo passo em uma linha. Seguido apenas do forecast total e lista de ações imediatas. Sem overhead — a informação que o gestor precisa sem a reunião de 1 hora.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="page-divider"></div>
+
+<!-- ==================== AUTOMAÇÕES ==================== -->
+<div class="section" id="automacoes">
+  <div class="section-header">
+    <div class="section-eyebrow" style="color:var(--qualificacao)">02 — Automações</div>
+    <h2>O que o sistema faz<br>sem precisar pedir</h2>
+    <p class="section-sub">Skills encadeadas com contexto acumulado — cada skill lê o que as anteriores descobriram e passa adiante sem repetir perguntas.</p>
+  </div>
+
+  <!-- TEMPO -->
+  <div class="auto-block">
+    <div class="auto-header">
+      <div class="trigger-badge t-tempo">⏱ Tempo</div>
+      <div class="auto-title">Por cadência periódica (semanal / mensal)</div>
+    </div>
+    <table class="auto-table">
+      <thead><tr><th>Skill</th><th>Frequência</th><th>O que gera automaticamente</th></tr></thead>
+      <tbody>
+        <tr><td class="td-skill" style="color:var(--gestao)">/avaliador-crm</td><td class="td-when">Toda semana (segunda-feira)</td><td class="td-what">Análise do pipeline atualizado, forecast das 4 categorias, plano de ação da semana e score de saúde. Pode ser disparado pelo próprio vendedor com os dados da semana colados em qualquer formato.</td></tr>
+        <tr><td class="td-skill" style="color:var(--gestao)">/avaliador-crm</td><td class="td-when">Primeiro dia do mês</td><td class="td-what">Revisão mensal comparativa com o mês anterior: variação de deals, valor total, forecast e score. Identifica tendências de melhora ou degradação do pipeline ao longo do tempo.</td></tr>
+        <tr><td class="td-skill" style="color:var(--processo)">/activity-flow</td><td class="td-when">A cada 30 dias (calibração)</td><td class="td-what">Revisão das metas de atividade baseada nas taxas de conversão reais — se a equipe está convertendo mais ou menos do previsto, o número de contatos por dia é recalibrado automaticamente.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- EVENTO -->
+  <div class="auto-block">
+    <div class="auto-header">
+      <div class="trigger-badge t-evento">⚡ Evento</div>
+      <div class="auto-title">Por evento no funil (algo acontece no processo)</div>
+    </div>
+    <table class="auto-table">
+      <thead><tr><th>Skill</th><th>Gatilho</th><th>O que acontece</th></tr></thead>
+      <tbody>
+        <tr><td class="td-skill" style="color:var(--comunicacao)">/scripts-whatsapp</td><td class="td-when">Reunião de diagnóstico realizada</td><td class="td-what">Gera follow-up imediato personalizado com resumo dos pontos alinhados na reunião para envio em até 2h — enquanto a conversa ainda está fresca na memória do prospect.</td></tr>
+        <tr><td class="td-skill" style="color:var(--comunicacao)">/scripts-whatsapp</td><td class="td-when">Proposta enviada</td><td class="td-what">Gera cadência completa de follow-up pós-proposta: D+2, D+5 e D+10 com angulações diferentes, cada mensagem com um único objetivo claro.</td></tr>
+        <tr><td class="td-skill" style="color:var(--diagnostico)">/spin-diagnostico</td><td class="td-when">Call de venda agendada (modo Preparação)</td><td class="td-what">Gera roteiro SPIN completo personalizado pelo perfil do prospect — perguntas de S/P/I/N calibradas para o produto e contexto, abertura recomendada e tabela de objeções prováveis.</td></tr>
+        <tr><td class="td-skill" style="color:var(--diagnostico)">/spin-diagnostico</td><td class="td-when">Call de venda realizada (modo Pós-Call)</td><td class="td-what">Processa as anotações e gera diagnóstico estruturado: problemas com intensidade, implicações por dimensão, critérios de decisão identificados e recomendação de como estruturar a proposta.</td></tr>
+        <tr><td class="td-skill" style="color:var(--comunicacao)">/scripts-whatsapp</td><td class="td-when">Contrato assinado</td><td class="td-what">Gera mensagem de boas-vindas do AE e mensagem de boas-vindas do CS para onboarding — ambas personalizadas com o contexto do cliente, sem precisar escrever do zero depois de cada fechamento.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- CRM -->
+  <div class="auto-block">
+    <div class="auto-header">
+      <div class="trigger-badge t-crm">🔍 CRM</div>
+      <div class="auto-title">Por sinal do pipeline (deal em risco ou parado)</div>
+    </div>
+    <table class="auto-table">
+      <thead><tr><th>Skill</th><th>Sinal detectado</th><th>O que acontece</th></tr></thead>
+      <tbody>
+        <tr><td class="td-skill" style="color:var(--gestao)">/avaliador-crm</td><td class="td-when">Deal sem atividade há 7+ dias</td><td class="td-what">Identifica o deal como 🔴 Em Risco, diagnostica o motivo provável (sem próximo passo, decisor sumiu, proposta velha) e gera próximo passo concreto com canal e prazo.</td></tr>
+        <tr><td class="td-skill" style="color:var(--gestao)">/avaliador-crm</td><td class="td-when">Deal na mesma etapa há mais de [X] dias</td><td class="td-what">Sinaliza como estagnado, avalia se é deal real ou esperança, e recomenda ação de desbloqueio ou critério de desqualificação se o bloqueio for estrutural.</td></tr>
+        <tr><td class="td-skill" style="color:var(--comunicacao)">/scripts-whatsapp</td><td class="td-when">Lead frio (sem resposta há 30 dias)</td><td class="td-what">Gera mensagem de reengajamento personalizada — check-in natural que não soa como mais um follow-up, com ângulo novo baseado em possíveis mudanças na empresa do lead.</td></tr>
+        <tr><td class="td-skill" style="color:var(--gestao)">/avaliador-crm</td><td class="td-when">Forecast do mês abaixo da meta</td><td class="td-what">Calcula automaticamente o gap (R$ faltando), estima quantos deals adicionais são necessários para cobrir e recomenda de onde podem vir — reativação de leads frios, aceleração de Best Cases ou nova prospecção.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- APROVAÇÃO -->
+  <div class="auto-block">
+    <div class="auto-header">
+      <div class="trigger-badge t-aprovacao">✅ Aprovação</div>
+      <div class="auto-title">Por gatilho de aprovação (cliente aprova entregável)</div>
+    </div>
+    <table class="auto-table">
+      <thead><tr><th>Skill aprovada</th><th>O que o cliente aprova</th><th>O que acontece automaticamente</th></tr></thead>
+      <tbody>
+        <tr><td class="td-skill" style="color:var(--diagnostico)">/comercial-diagnostico</td><td class="td-when">Diagnóstico validado pelo cliente</td><td class="td-what">Contexto salvo em cliente-contexto.md alimenta as próximas 6 skills — sem reentrevistar sobre empresa, segmento, ICP e gaps já identificados.</td></tr>
+        <tr><td class="td-skill" style="color:var(--qualificacao)">/qualificacao-leads</td><td class="td-when">ICP e critérios de scoring aprovados</td><td class="td-what">Playbook e scripts gerados com ICP e critérios corretos — sem divergência entre o framework de qualificação e os scripts de abordagem.</td></tr>
+        <tr><td class="td-skill" style="color:var(--processo)">/playbook-comercial</td><td class="td-when">Playbook revisado e aprovado</td><td class="td-what">Blueprint e Activity Flow gerados usando o funil e critérios de avanço definidos no playbook — consistência garantida entre os três documentos.</td></tr>
+        <tr><td class="td-skill" style="color:var(--comunicacao)">/scripts-whatsapp</td><td class="td-when">Scripts revisados pela equipe comercial</td><td class="td-what">Biblioteca de scripts pronta para distribuição — formatada para salvar nos favoritos do WhatsApp Business ou integrar com ferramenta de atendimento.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ONBOARDING -->
+  <div class="auto-block">
+    <div class="auto-header">
+      <div class="trigger-badge t-onboarding">🚀 Onboarding</div>
+      <div class="auto-title">Por gatilho de onboarding (empresa nova na consultoria)</div>
+    </div>
+    <table class="auto-table">
+      <thead><tr><th style="width:52px">#</th><th>Skill</th><th>O que entrega</th></tr></thead>
+      <tbody>
+        <tr><td class="td-order">1</td><td class="td-skill" style="color:var(--diagnostico)">/comercial-diagnostico</td><td class="td-what">Estado atual da operação, análise do funil, matriz de maturidade e roadmap de 0-180 dias. Documento de entrada que justifica o projeto e define o ponto de partida.</td></tr>
+        <tr><td class="td-order">2</td><td class="td-skill" style="color:var(--qualificacao)">/qualificacao-leads</td><td class="td-what">ICP documentado, BANT adaptado, modelo de scoring e roteiro de qualificação. Contexto do diagnóstico já pré-carregado — nenhuma pergunta repetida.</td></tr>
+        <tr><td class="td-order">3</td><td class="td-skill" style="color:var(--processo)">/playbook-comercial</td><td class="td-what">Guia operacional completo: proposta de valor, funil com critérios, abordagem, objeções, fechamento e métricas. Usa ICP e gaps do diagnóstico como base.</td></tr>
+        <tr><td class="td-order">4</td><td class="td-skill" style="color:var(--processo)">/blueprint-comercial</td><td class="td-what">Mapa ponta a ponta do processo: papéis, sistemas, handoffs e pontos críticos. Consistente com as etapas definidas no playbook.</td></tr>
+        <tr><td class="td-order">5</td><td class="td-skill" style="color:var(--processo)">/activity-flow</td><td class="td-what">Funil reverso calculado + rotina diária/semanal por papel. A meta vira número de contatos por dia. Nenhum vendedor fica sem saber o que fazer às 9h da manhã.</td></tr>
+        <tr><td class="td-order">6</td><td class="td-skill" style="color:var(--comunicacao)">/scripts-whatsapp</td><td class="td-what">Biblioteca completa de 30+ scripts calibrados com o produto, ICP e diferenciais da empresa. Personalizados — não genéricos.</td></tr>
+        <tr><td class="td-order">7+</td><td class="td-skill" style="color:var(--gestao)">/avaliador-crm</td><td class="td-what">Revisão semanal de pipeline rodando. Forecast honesto, próximos passos e score de saúde toda segunda-feira. A operação já estruturada agora tem gestão contínua.</td></tr>
+      </tbody>
+    </table>
+    <div style="margin-top:12px; padding:14px 18px; background:var(--surface2); border-radius:8px; border:1px solid var(--border); font-size:12px; color:var(--muted2);">
+      💡 <strong style="color:var(--text)">Do zero a uma operação comercial estruturada em 7 sessões.</strong> Cada skill acumula contexto no cliente-contexto.md — nenhuma informação é recoletada. O cliente responde uma vez, o sistema usa em tudo.
+    </div>
+  </div>
+
+</div>
+
+<div class="page-divider"></div>
+
+<!-- ==================== FLUXO COMPLETO ==================== -->
+<div class="section" id="fluxo">
+  <div class="section-header">
+    <div class="section-eyebrow" style="color:var(--gestao)">03 — Fluxo Completo</div>
+    <h2>Do briefing ao pipeline<br>rodando no piloto automático</h2>
+    <p class="section-sub">Uma operação construída do zero — diagnóstico, processo, scripts e gestão — com contexto acumulado entre todas as etapas.</p>
+  </div>
+
+  <div class="flow-wrap">
+    <div class="flow-pipeline">
+
+      <div class="flow-step">
+        <div class="flow-icon">📋</div>
+        <div class="flow-body">
+          <div class="flow-label">Entrada</div>
+          <div class="flow-action">Briefing inicial — empresa nova na consultoria</div>
+          <div class="flow-detail">Nome da empresa, segmento, porte e situação geral. Pode ser um formulário, uma conversa no WhatsApp ou uma reunião de kickoff. É o único momento de coleta livre — daqui pra frente, o sistema acumula e reutiliza.</div>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-icon">🔍</div>
+        <div class="flow-body">
+          <div class="flow-label">Diagnóstico</div>
+          <div class="flow-action">/comercial-diagnostico — estado atual e gaps</div>
+          <div class="flow-detail">Entrevista interativa em 5 blocos. Mapeia estrutura, funil, ferramentas, motivos de perda e visão de futuro. Gera documento com matriz de maturidade e roadmap. Salva tudo em cliente-contexto.md.</div>
+          <div class="flow-tags">
+            <span class="skill-pill">/comercial-diagnostico</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-icon">🎯</div>
+        <div class="flow-body">
+          <div class="flow-label">Qualificação</div>
+          <div class="flow-action">/qualificacao-leads — ICP, scoring e critérios</div>
+          <div class="flow-detail">Lê o diagnóstico, completa com perguntas sobre o cliente ideal. Gera ICP documentado, BANT adaptado e modelo de scoring. Contexto de segmento e produto já vem do diagnóstico anterior — sem reperguntar.</div>
+          <div class="flow-tags">
+            <span class="skill-pill">/qualificacao-leads</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-icon">🔀</div>
+        <div class="flow-body">
+          <div class="flow-label">Paralelo</div>
+          <div class="flow-action">Playbook + Blueprint + Activity Flow em sequência</div>
+          <div class="flow-detail">Três skills que usam o mesmo contexto acumulado. O playbook define o funil e os critérios; o blueprint mapeia quem faz o quê em cada sistema; o activity flow converte a meta em rotina diária. Cada uma alimenta a próxima.</div>
+          <div class="flow-tags">
+            <span class="skill-pill">/playbook-comercial</span>
+            <span class="skill-pill">/blueprint-comercial</span>
+            <span class="skill-pill">/activity-flow</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-icon">💬</div>
+        <div class="flow-body">
+          <div class="flow-label">Comunicação</div>
+          <div class="flow-action">/scripts-whatsapp — biblioteca completa de scripts</div>
+          <div class="flow-detail">Lê o ICP, o produto e os diferenciais do contexto acumulado. Gera 30+ scripts personalizados para todas as etapas do funil — prospecção, qualificação, reunião, proposta, objeções e fechamento. Nenhum script genérico.</div>
+          <div class="flow-tags">
+            <span class="skill-pill">/scripts-whatsapp</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-icon">✅</div>
+        <div class="flow-body">
+          <div class="flow-label">Entrega</div>
+          <div class="flow-action">Cliente revisa e aprova os entregáveis</div>
+          <div class="flow-detail">6 documentos entregáveis: diagnóstico, framework de qualificação, playbook, blueprint, activity flow e scripts. Cada um revisado, aprovado e implementado pela equipe comercial do cliente.</div>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-icon">🏃</div>
+        <div class="flow-body">
+          <div class="flow-label">Operação</div>
+          <div class="flow-action">Equipe opera com o framework — calls, prospecção, pipeline</div>
+          <div class="flow-detail">SDR prospectando com os scripts e critérios do ICP. AE conduzindo reuniões com o roteiro SPIN. Vendedores seguindo a rotina do activity flow. Deals registrados no CRM conforme os critérios do playbook.</div>
+          <div class="flow-tags">
+            <span class="skill-pill">/spin-diagnostico</span>
+            <span class="skill-pill">/scripts-whatsapp</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-icon">📊</div>
+        <div class="flow-body">
+          <div class="flow-label">Gestão contínua</div>
+          <div class="flow-action">/avaliador-crm — revisão semanal de pipeline</div>
+          <div class="flow-detail">Toda semana: deals analisados com diagnóstico honesto, forecast nas 4 categorias, plano de ação e score de saúde do pipeline. Deal em risco detectado → próximo passo gerado na hora. Forecast abaixo da meta → gap calculado e fonte de deals sugerida.</div>
+          <div class="flow-tags">
+            <span class="skill-pill">/avaliador-crm</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-icon">🔄</div>
+        <div class="flow-body">
+          <div class="flow-label">Evolução</div>
+          <div class="flow-action">Dados reais calibram o processo — ciclo de melhoria contínua</div>
+          <div class="flow-detail">Taxas de conversão reais atualizam o funil reverso do activity flow. Objeções novas entram no playbook. Scripts com baixa resposta são testados com variações. O processo aprende com a operação.</div>
+          <div class="flow-tags">
+            <span class="skill-pill">/activity-flow</span>
+            <span class="skill-pill">/playbook-comercial</span>
+            <span class="skill-pill">/scripts-whatsapp</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<footer>
+  <strong>Automa Labs</strong> — Módulo de Consultoria Comercial &nbsp;·&nbsp; 2026
+</footer>
+
+</body>
+</html>

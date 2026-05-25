@@ -1,0 +1,27 @@
+# Dados pessoais — não distribuir
+Operação/_memoria/empresa.md
+Operação/_memoria/preferencias.md
+Operação/_memoria/estrategia.md
+
+# Dados de clientes
+Operação/clientes/*/
+
+# Arquivos de identidade pessoal
+Operação/identidade/logo*
+Operação/identidade/design-guide.md
+
+# Saídas e análises pessoais
+Operação/saidas/*
+Operação/marketing/*
+Operação/dados/*
+
+# Manter as pastas (estrutura), ignorar só o conteúdo
+!Operação/saidas/.gitkeep
+!Operação/marketing/.gitkeep
+!Operação/dados/.gitkeep
+!Operação/clientes/.gitkeep
+
+# OS e editor
+.DS_Store
+Thumbs.db
+*.tmp
