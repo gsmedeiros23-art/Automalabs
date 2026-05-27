@@ -80,15 +80,6 @@ Write-Host "  [1/3] Copiando sistema Automalabs..." -ForegroundColor White
 New-Item -ItemType Directory -Force $destino | Out-Null
 Copy-Item -Path "$operacaoSrc\*" -Destination $destino -Recurse -Force
 
-# Limpar _memoria/ para estado limpo (sem dados do instalador original)
-$memoriaDir = Join-Path $destino "_memoria"
-$templateDir = Join-Path $scriptDir "_template\_memoria"
-
-if (Test-Path $templateDir) {
-    Copy-Item -Path "$templateDir\*" -Destination $memoriaDir -Force
-    Write-Host "       _memoria/ resetada para estado limpo" -ForegroundColor DarkGray
-}
-
 # Limpar clientes/ (manter só a estrutura)
 $clientesDir = Join-Path $destino "clientes"
 if (Test-Path $clientesDir) {
