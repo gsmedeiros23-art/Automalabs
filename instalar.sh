@@ -84,15 +84,6 @@ echo -e "${WHITE}  [1/3] Copiando sistema Automalabs...${NC}"
 mkdir -p "$DESTINO"
 cp -r "$OPERACAO_SRC/." "$DESTINO/"
 
-# Limpar _memoria/ para estado limpo
-MEMORIA_DIR="$DESTINO/_memoria"
-TEMPLATE_DIR="$SCRIPT_DIR/_template/_memoria"
-
-if [ -d "$TEMPLATE_DIR" ]; then
-  cp "$TEMPLATE_DIR/"* "$MEMORIA_DIR/" 2>/dev/null && \
-    echo -e "${GRAY}       _memoria/ resetada para estado limpo${NC}"
-fi
-
 # Limpar clientes/
 CLIENTES_DIR="$DESTINO/clientes"
 if [ -d "$CLIENTES_DIR" ]; then
