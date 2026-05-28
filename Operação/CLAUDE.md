@@ -1,33 +1,52 @@
-# CLAUDE.md
+# ÓLUX — Automalabs
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
-
-# Automalabs
-
-> Execute `/instalar` para configurar este sistema para o seu negócio.
+Operação da empresa. Cada setor tem sua área, com processos, entregas e documentos.
 
 **Estrutura de pastas:**
-- `_memoria/` — quem é você, como fala, o que está em foco
-- `identidade/` — cores, fontes, logo da sua marca
-- `clientes/` — pasta por cliente, cada um com briefing e entregas
-- `marketing/` — conteúdo, SEO, campanhas (saída das skills)
-- `saidas/` — análises, emails, documentos pontuais
+- `_memoria/` — quem é a empresa, como falamos, foco atual
+- `identidade/` — marca aplicada em tudo que o sistema gera
+- `marketing/` — campanhas, conteúdo, mídia paga
+- `clientes/` — projetos por cliente (construtoras, condomínios, corporativo)
+- `saidas/` — documentos pontuais (análises, emails, propostas rápidas)
 - `dados/` — arquivos a analisar (CSV, PDF, planilha)
-- `scripts/` — utilitários (gerar imagem, postar, render)
+- `scripts/` — utilitários (gerar imagem, render, automações)
 
 ---
 
 ## Contexto do negócio
 
-No início de toda conversa, ler os seguintes arquivos (quando existirem e estiverem preenchidos):
+No início de toda conversa, ler os seguintes arquivos:
 
-1. `_memoria/empresa.md` — quem você é, o que faz, clientes ativos
+1. `_memoria/empresa.md` — quem é a ÓLUX, o que faz, equipe, clientes
 2. `_memoria/preferencias.md` — tom de voz, estilo de escrita, o que evitar
 3. `_memoria/estrategia.md` — foco atual, prioridades, prazos
 
-Para qualquer tarefa visual (carrossel, post, landing page), consultar `identidade/design-guide.md` como referência de estilo. Se o arquivo estiver em branco, usar os defaults: Inter, títulos 90-100px peso 900, fundo escuro (#0E1116), texto off-white (#FAFAF7).
+Para qualquer tarefa visual (carrossel, post, proposta, landing page), consultar `identidade/design-guide.md`. Cores principais: Azul ÓLUX `#3333EE`, Magenta `#FF1FA0`, Ice `#D9F2FF`.
 
-Não é necessário listar o que foi lido nem confirmar a leitura. Apenas usar o contexto naturalmente.
+Não listar o que foi lido nem confirmar a leitura. Usar o contexto naturalmente.
+
+---
+
+## Sobre a empresa
+
+ÓLUX é uma empresa de segurança inteligente — sistemas eletrônicos integrados de segurança e automação. Atua em construção civil, residencial, condominial, corporativo e smart cities. Equipe com múltiplos setores (suporte, atendimento, CS, vendas, admin, RH, dev, tecnologia). Cresceu até hoje por indicação — agora estruturando o comercial.
+
+## Setores
+
+- **Comercial:** 1 vendedora ativa + diretor chegando. Foco: estruturar processo e previsibilidade.
+- **Customer Success:** gestão de clientes ativos, relacionamento pós-venda
+- **Suporte / Atendimento:** operação 24h, 3 centrais de segurança
+- **Tecnologia / Desenvolvimento:** produto próprio (app PHI) e sistemas integrados
+- **Marketing:** apoio ao comercial, conteúdo, presença digital
+- **Administrativo / RH / Financeiro:** estrutura de suporte interno
+
+## O que mais fazemos aqui
+
+- Propostas comerciais para construtoras, condomínios e corporativo
+- Conteúdo de marketing (carrosséis, posts, artigos, ads)
+- Análise de dados e relatórios de segurança
+- Materiais de apoio ao time comercial (scripts, qualificação, follow-up)
+- SEO e presença digital
 
 ---
 
@@ -43,17 +62,14 @@ Ao concluir uma tarefa que não tinha skill mas parece repetível, perguntar:
 
 ## Aprender com correções
 
-Quando você corrigir algo ou der instrução permanente ("prefiro assim", "sempre que...", "evita..."), perguntar:
+Quando o usuário corrigir algo ou der instrução permanente, perguntar:
 
 > "Quer que eu salve isso pra não precisar repetir?"
 
-Identificar onde salvar:
-- **Sobre o negócio ou clientes** → `_memoria/empresa.md`
-- **Sobre preferências e estilo** → `_memoria/preferencias.md`
-- **Sobre prioridades e foco** → `_memoria/estrategia.md`
-- **Regra de comportamento** → `CLAUDE.md`
-
-Salvar com uma linha nova clara, sem reformatar o arquivo inteiro.
+- Sobre o negócio ou clientes → `_memoria/empresa.md`
+- Sobre preferências e estilo → `_memoria/preferencias.md`
+- Sobre prioridades e foco → `_memoria/estrategia.md`
+- Regra de comportamento → `CLAUDE.md`
 
 ---
 
@@ -63,17 +79,7 @@ Ao terminar uma tarefa que mudou algo relevante (cliente novo, skill nova, mudan
 
 > "Isso mudou algo no teu contexto. Quer que eu atualize a memória?"
 
-**Quando NÃO perguntar:** tarefas pontuais sem impacto no contexto, perguntas simples.
-
----
-
-## Criação de skills
-
-Quando você pedir skill nova:
-
-1. Verificar se existe template relevante em `templates/skills/`
-2. Perguntar se é específica desse projeto ou útil em qualquer workspace
-3. Ler `_memoria/empresa.md` e `_memoria/preferencias.md` para calibrar ao contexto
+Não perguntar em tarefas pontuais sem impacto no contexto.
 
 ---
 
