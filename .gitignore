@@ -1,5 +1,7 @@
-# Dados de clientes
+# Dados de clientes (ignorar subpastas reais, manter template)
 Operação/clientes/*/
+!Operação/clientes/_novo-cliente/
+!Operação/clientes/_novo-cliente/**
 
 # Arquivos de identidade pessoal
 Operação/identidade/logo*
