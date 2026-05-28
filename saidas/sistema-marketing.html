@@ -1,0 +1,730 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Automa Labs — Módulo de Marketing Digital</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0C0E14;
+  --surface: #13161F;
+  --surface2: #1C2030;
+  --border: rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.13);
+  --text: #F0F2F8;
+  --muted: #5A6170;
+  --muted2: #9CA3AF;
+  --midia: #3B82F6;
+  --seo: #10B981;
+  --conteudo: #F59E0B;
+  --analise: #8B5CF6;
+  --visual: #EC4899;
+  --comunicacao: #06B6D4;
+  --gestao: #6366F1;
+  --tempo: #F59E0B;
+  --performance: #EF4444;
+  --evento: #10B981;
+  --aprovacao: #8B5CF6;
+  --onboarding: #3B82F6;
+  --lead: #EC4899;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; font-size: 15px; }
+
+/* NAV */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(12,14,20,0.94);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 48px;
+  display: flex; align-items: center; gap: 4px;
+  height: 54px;
+}
+.nav-brand { font-weight: 900; font-size: 14px; color: var(--text); letter-spacing: -0.02em; margin-right: 20px; white-space: nowrap; }
+.nav-brand span { color: var(--midia); }
+nav a { color: var(--muted2); text-decoration: none; font-size: 13px; font-weight: 500; padding: 5px 11px; border-radius: 6px; transition: all 0.15s; white-space: nowrap; }
+nav a:hover { color: var(--text); background: var(--surface2); }
+.nav-sep { width: 1px; height: 18px; background: var(--border2); margin: 0 6px; }
+.nav-pill { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 8px; border-radius: 20px; margin-left: auto; background: rgba(59,130,246,0.12); color: var(--midia); }
+
+/* HERO */
+.hero { padding: 80px 48px 64px; max-width: 1200px; margin: 0 auto; }
+.hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.26em; text-transform: uppercase; color: var(--midia); margin-bottom: 18px; }
+.hero h1 { font-size: 72px; font-weight: 900; letter-spacing: -0.04em; line-height: 0.96; margin-bottom: 24px; }
+.hero h1 .grad { background: linear-gradient(120deg, var(--midia) 0%, var(--visual) 60%, var(--conteudo) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero-sub { font-size: 17px; color: var(--muted2); max-width: 520px; line-height: 1.65; margin-bottom: 48px; font-weight: 400; }
+.stats-row { display: flex; gap: 0; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; max-width: 640px; }
+.stat { flex: 1; padding: 20px 24px; border-right: 1px solid var(--border); }
+.stat:last-child { border-right: none; }
+.stat-num { font-size: 36px; font-weight: 900; letter-spacing: -0.04em; line-height: 1; }
+.stat-label { font-size: 11px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; margin-top: 4px; }
+
+/* DIVIDER */
+.page-divider { height: 1px; background: var(--border); margin: 0 48px; }
+
+/* SECTION */
+.section { padding: 72px 48px; max-width: 1200px; margin: 0 auto; }
+.section-header { margin-bottom: 52px; }
+.section-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.26em; text-transform: uppercase; margin-bottom: 10px; }
+.section h2 { font-size: 44px; font-weight: 900; letter-spacing: -0.035em; line-height: 1.08; }
+.section-sub { font-size: 15px; color: var(--muted2); margin-top: 10px; max-width: 520px; }
+
+/* CATEGORY */
+.category { margin-bottom: 60px; }
+.cat-header { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+.cat-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.cat-title { font-size: 18px; font-weight: 800; letter-spacing: -0.02em; }
+.cat-count { font-size: 11px; font-weight: 600; color: var(--muted); background: var(--surface2); border: 1px solid var(--border); padding: 2px 9px; border-radius: 20px; margin-left: auto; }
+
+/* CARDS */
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 14px; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 22px; position: relative; overflow: hidden; transition: border-color 0.2s, transform 0.2s; }
+.card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; }
+.card:hover { border-color: var(--border2); transform: translateY(-1px); }
+.card-skills { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 11px; }
+.skill-tag { display: inline-block; font-size: 10px; font-weight: 700; font-family: 'Courier New', monospace; padding: 2px 7px; border-radius: 4px; }
+.card-title { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 7px; letter-spacing: -0.01em; line-height: 1.35; }
+.card-desc { font-size: 12.5px; color: var(--muted2); line-height: 1.6; }
+
+/* Category color variants */
+.c-midia .card::before { background: var(--midia); }
+.c-midia .skill-tag { background: rgba(59,130,246,0.13); color: var(--midia); }
+
+.c-seo .card::before { background: var(--seo); }
+.c-seo .skill-tag { background: rgba(16,185,129,0.13); color: var(--seo); }
+
+.c-conteudo .card::before { background: var(--conteudo); }
+.c-conteudo .skill-tag { background: rgba(245,158,11,0.13); color: var(--conteudo); }
+
+.c-analise .card::before { background: var(--analise); }
+.c-analise .skill-tag { background: rgba(139,92,246,0.13); color: var(--analise); }
+
+.c-visual .card::before { background: var(--visual); }
+.c-visual .skill-tag { background: rgba(236,72,153,0.13); color: var(--visual); }
+
+.c-comunicacao .card::before { background: var(--comunicacao); }
+.c-comunicacao .skill-tag { background: rgba(6,182,212,0.13); color: var(--comunicacao); }
+
+.c-gestao .card::before { background: var(--gestao); }
+.c-gestao .skill-tag { background: rgba(99,102,241,0.13); color: var(--gestao); }
+
+/* AUTOMATION BLOCKS */
+.auto-block { margin-bottom: 44px; }
+.auto-header { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.trigger-badge { font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; padding: 4px 11px; border-radius: 20px; }
+.auto-title { font-size: 17px; font-weight: 800; letter-spacing: -0.02em; }
+
+.t-tempo { background: rgba(245,158,11,0.13); color: var(--tempo); }
+.t-performance { background: rgba(239,68,68,0.13); color: var(--performance); }
+.t-evento { background: rgba(16,185,129,0.13); color: var(--evento); }
+.t-aprovacao { background: rgba(139,92,246,0.13); color: var(--aprovacao); }
+.t-onboarding { background: rgba(59,130,246,0.13); color: var(--onboarding); }
+.t-lead { background: rgba(236,72,153,0.13); color: var(--lead); }
+
+.auto-table { width: 100%; border-collapse: collapse; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+.auto-table thead tr { border-bottom: 1px solid var(--border); }
+.auto-table th { padding: 11px 18px; text-align: left; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.16em; color: var(--muted); background: var(--surface); }
+.auto-table tbody tr { border-bottom: 1px solid var(--border); transition: background 0.12s; }
+.auto-table tbody tr:last-child { border-bottom: none; }
+.auto-table tbody tr:hover { background: var(--surface2); }
+.auto-table td { padding: 13px 18px; font-size: 13px; vertical-align: top; line-height: 1.5; }
+.auto-table td.td-skill { font-family: 'Courier New', monospace; font-size: 11px; font-weight: 700; white-space: nowrap; }
+.auto-table td.td-when { color: var(--muted2); font-size: 12px; white-space: nowrap; }
+.auto-table td.td-what { color: var(--text); }
+.auto-table td.td-order { font-weight: 800; font-size: 22px; color: var(--muted); letter-spacing: -0.03em; width: 52px; }
+
+.skill-pill { display: inline-block; font-family: 'Courier New', monospace; font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px; background: var(--surface2); color: var(--muted2); border: 1px solid var(--border); white-space: nowrap; margin: 1px; }
+
+/* FLOW */
+.flow-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 48px; }
+.flow-title { font-size: 18px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 8px; text-align: center; }
+.flow-sub { font-size: 13px; color: var(--muted2); text-align: center; margin-bottom: 48px; }
+.flow-pipeline { display: flex; flex-direction: column; max-width: 660px; margin: 0 auto; }
+.flow-step { display: flex; gap: 18px; position: relative; }
+.flow-step:not(:last-child)::after { content: ''; position: absolute; left: 19px; top: 44px; bottom: -16px; width: 2px; background: linear-gradient(to bottom, var(--border2), var(--border)); }
+.flow-icon { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 17px; flex-shrink: 0; border: 1px solid var(--border2); background: var(--surface2); z-index: 1; margin-top: 2px; }
+.flow-body { padding-bottom: 32px; flex: 1; }
+.flow-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; color: var(--muted); margin-bottom: 3px; }
+.flow-action { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+.flow-detail { font-size: 12px; color: var(--muted2); line-height: 1.55; margin-bottom: 8px; }
+.flow-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+
+/* FOOTER */
+footer { padding: 36px 48px; text-align: center; color: var(--muted); font-size: 12px; border-top: 1px solid var(--border); }
+footer strong { color: var(--muted2); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">Automa<span>Labs</span> — Marketing</div>
+  <a href="#entregaveis">Entregáveis</a>
+  <a href="#automacoes">Automações</a>
+  <a href="#fluxo">Fluxo Completo</a>
+  <div class="nav-sep"></div>
+  <a href="#midia">Mídia Paga</a>
+  <a href="#seo">SEO</a>
+  <a href="#conteudo">Conteúdo</a>
+  <a href="#analise">Análise</a>
+  <a href="#visual">Visual</a>
+  <a href="#comunicacao">Comunicação</a>
+  <a href="#gestao">Gestão</a>
+  <a href="#bonus">Bônus</a>
+  <div class="nav-pill">v1.0 — 2026</div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Automa Labs — Módulo de Marketing Digital</div>
+  <h1>Tudo que o sistema<br>pode <span class="grad">entregar.</span></h1>
+  <p class="hero-sub">Tudo o que o módulo de marketing pode entregar.</p>
+</div>
+
+<div class="page-divider"></div>
+
+<!-- ==================== ENTREGÁVEIS ==================== -->
+<div class="section" id="entregaveis">
+  <div class="section-header">
+    <div class="section-eyebrow" style="color:var(--midia)">01 — Entregáveis</div>
+    <h2>O que o sistema produz</h2>
+    <p class="section-sub">Cada skill gera entregáveis prontos para usar — sem rascunho, sem template vazio.</p>
+  </div>
+
+  <!-- MÍDIA PAGA -->
+  <div class="category c-midia" id="midia">
+    <div class="cat-header">
+      <div class="cat-dot" style="background:var(--midia)"></div>
+      <div class="cat-title" style="color:var(--midia)">Mídia Paga</div>
+      <div class="cat-count">5 entregáveis</div>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/anuncio-google</span></div>
+        <div class="card-title">Campanha Google Ads completa</div>
+        <div class="card-desc">Do briefing ao CSV pronto pro Google Ads Editor. Campanhas Search por cluster de keywords, RSAs com 15 headlines e 4 descriptions, extensões (sitelinks, chamadas, snippets) e lista de negativas. 8 arquivos + README de como subir.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/meta-ads</span></div>
+        <div class="card-title">Campanha Meta Ads completa</div>
+        <div class="card-desc">Públicos em 3 camadas (frio, morno, quente), 2 versões de copy por ângulo, criativos Feed 4:5 e Stories 9:16, configurações de orçamento e lance, checklist de lançamento e guia passo a passo no Ads Manager.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/carrossel</span><span class="skill-tag">/meta-ads</span></div>
+        <div class="card-title">Criativos de anúncio para Meta</div>
+        <div class="card-desc">Assets no tamanho certo por posicionamento: 1080×1350 pro Feed, 1080×1920 pra Stories e Reels. Carrossel de 3-5 slides + imagem única por conjunto — variações A/B prontas para teste.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/relatorio-ads</span></div>
+        <div class="card-title">Relatório semanal Google + Meta</div>
+        <div class="card-desc">Investimento total, conversões, CPA, top e bottom campanhas de cada canal, alertas automáticos (frequência alta, CTR caindo, queima sem conversão) e 3–5 ações concretas. Relatório em prosa, leitura de 2 minutos.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/relatorio-ads</span><span class="skill-tag">/meta-ads</span></div>
+        <div class="card-title">Ciclo de renovação baseado em dados</div>
+        <div class="card-desc">Quando o relatório detecta frequência acima de 3.0, gera criativos e copies frescos só pro conjunto saturado. No Google, keywords sem conversão nos search terms viram negativas automaticamente na semana seguinte.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEO -->
+  <div class="category c-seo" id="seo">
+    <div class="cat-header">
+      <div class="cat-dot" style="background:var(--seo)"></div>
+      <div class="cat-title" style="color:var(--seo)">SEO e Presença Orgânica</div>
+      <div class="cat-count">3 entregáveis</div>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/seo</span></div>
+        <div class="card-title">Diagnóstico completo de presença digital</div>
+        <div class="card-desc">8 passos, 8 documentos: pesquisa de 30–50 termos classificados, análise de quem domina os resultados e gaps, GMB com descrição otimizada, checklist on-page por página, schema markup JSON-LD, estratégia de conteúdo com 10–20 temas priorizados.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/seo</span></div>
+        <div class="card-title">Otimização para IAs — GEO</div>
+        <div class="card-desc">Auditoria de como o negócio aparece no ChatGPT, Gemini e Perplexity. Entrega FAQ com schema FAQPage, lista de ações pra aumentar citações em fontes que as IAs consultam e checklist de monitoramento mensal. Diferencial competitivo que quase ninguém faz ainda.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/seo</span><span class="skill-tag">/responder-avaliacoes</span></div>
+        <div class="card-title">Google Meu Negócio operacional</div>
+        <div class="card-desc">Descrição otimizada com keywords naturais, checklist de fotos por categoria, 4 posts iniciais prontos e calendário recorrente, estratégia de captação de avaliações. O /responder-avaliacoes fecha o ciclo respondendo cada review no tom da marca.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTEÚDO ORGÂNICO -->
+  <div class="category c-conteudo" id="conteudo">
+    <div class="cat-header">
+      <div class="cat-dot" style="background:var(--conteudo)"></div>
+      <div class="cat-title" style="color:var(--conteudo)">Conteúdo Orgânico</div>
+      <div class="cat-count">4 entregáveis</div>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/seo</span><span class="skill-tag">/publicar-tema</span><span class="skill-tag">/aprovar-post</span></div>
+        <div class="card-title">Fábrica de conteúdo end-to-end</div>
+        <div class="card-desc">/seo entrega lista de temas priorizados → /publicar-tema cria blog + carrossel + legendas → /aprovar-post publica no site, Instagram e Facebook com um "ok" do cliente. Um comando por tema, quatro canais abastecidos.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/meta-ads</span><span class="skill-tag">/publicar-tema</span></div>
+        <div class="card-title">Conteúdo pago e orgânico integrados</div>
+        <div class="card-desc">Criativos do /meta-ads usam o mesmo tema e ângulo do conteúdo orgânico do /publicar-tema. As duas skills leem o mesmo _memoria/ e design-guide.md — quem vê o anúncio e depois encontra o post orgânico recebe a mesma mensagem com consistência.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/publicar-tema</span><span class="skill-tag">/carrossel</span></div>
+        <div class="card-title">Legendas por plataforma com lógica diferente</div>
+        <div class="card-desc">Gera automaticamente duas versões: legenda Instagram/Facebook (hook + contexto + CTA + hashtags) e legenda LinkedIn (tom analítico, texto longo, link direto pro blog, máx 3 hashtags). O mesmo conteúdo com a linguagem certa pra cada audiência.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/responder-avaliacoes</span></div>
+        <div class="card-title">Respostas de reviews que parecem humanas</div>
+        <div class="card-desc">Respostas curtas, com o nome do cliente, variando o agradecimento e puxando algo concreto da review. Nunca duas iguais. Reviews negativas param antes de responder — alinhamento antes de qualquer coisa irreversível.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ANÁLISE -->
+  <div class="category c-analise" id="analise">
+    <div class="cat-header">
+      <div class="cat-dot" style="background:var(--analise)"></div>
+      <div class="cat-title" style="color:var(--analise)">Análise e Inteligência</div>
+      <div class="cat-count">3 entregáveis</div>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/seo</span><span class="skill-tag">/analisar-dados</span><span class="skill-tag">/relatorio-ads</span></div>
+        <div class="card-title">Diagnóstico de marketing vendável</div>
+        <div class="card-desc">Combinação das três skills em um único entregável de entrada: presença orgânica, quem domina o nicho, performance atual de ads, origem dos leads e recomendação de onde atacar primeiro. Produto de diagnóstico que justifica o contrato de gestão.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/analisar-dados</span></div>
+        <div class="card-title">Análise de qualquer dado do cliente</div>
+        <div class="card-desc">Planilha de projetos, histórico de leads, dados do GA4, pesquisa com clientes — lê qualquer CSV, Excel ou JSON e entrega resumo executivo em prosa: o que funciona, o que preocupa, correlações não óbvias e 3 recomendações concretas.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/seo</span></div>
+        <div class="card-title">Benchmark de concorrentes</div>
+        <div class="card-desc">Analisa quem aparece nos resultados do Google, o perfil de GMB de cada concorrente, quais ads rodam e o que falam no site. Alimenta diretamente as copies do /meta-ads e /anuncio-google — anúncios que se diferenciam do que os concorrentes já dizem.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VISUAL E EDITORIAL -->
+  <div class="category c-visual" id="visual">
+    <div class="cat-header">
+      <div class="cat-dot" style="background:var(--visual)"></div>
+      <div class="cat-title" style="color:var(--visual)">Conteúdo Visual e Editorial</div>
+      <div class="cat-count">8 entregáveis</div>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/carrossel</span></div>
+        <div class="card-title">Stories e Reels prontos</div>
+        <div class="card-desc">Formato 9:16 (1080×1920) nativo. O mesmo conteúdo criado pro feed é reconfigurado pro vertical com um pedido explícito — layouts, tipografia e hierarquia adaptados. Alto potencial para conteúdo de antes/depois e bastidores.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/carrossel</span></div>
+        <div class="card-title">Pitch deck e apresentação comercial</div>
+        <div class="card-desc">O mesmo mecanismo que renderiza carrosséis (HTML + Playwright) gera apresentações completas em PNG. Layouts CAPA, NÚMERO, CITAÇÃO e CTA já prontos — aplicados ao conteúdo de negócio com identidade visual da marca.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/carrossel</span></div>
+        <div class="card-title">Lead magnet e e-book visual</div>
+        <div class="card-desc">HTML renderizado via Playwright vira PDF. Um guia de "5 erros que encarecem uma reforma" captura email antes de o lead estar pronto pra comprar — e posiciona o cliente como referência. Conteúdo segue padrão editorial do blog, visual segue design-guide.md.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/carrossel</span></div>
+        <div class="card-title">Thumbnails e capas de YouTube</div>
+        <div class="card-desc">Post único em 1280×720 com a mesma engine de renderização. Título grande, imagem de fundo, identidade visual aplicada. Thumbnail consistente sem precisar de designer a cada vídeo — aumenta CTR e reforça reconhecimento de marca.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/carrossel</span></div>
+        <div class="card-title">Media kit da agência</div>
+        <div class="card-desc">Slides de posicionamento, serviços, cases, números, processo de trabalho e contato. Entregável que vai antes de uma reunião comercial. Gerado uma vez, atualizado com /atualizar quando mudar algo relevante.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/carrossel</span></div>
+        <div class="card-title">Briefing de produção fotográfica</div>
+        <div class="card-desc">Baseado no design-guide.md e no briefing do cliente: paleta de cores do ambiente, temperatura de luz, enquadramentos sugeridos, referências visuais, o que evitar. Documento concreto pra passar pra um fotógrafo ou orientar uma sessão com celular.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/publicar-tema</span></div>
+        <div class="card-title">Scripts de vídeo</div>
+        <div class="card-desc">Formato de roteiro: gancho nos primeiros 3 segundos, desenvolvimento com um insight por bloco, CTA no final. No tom calibrado do cliente, sem parecer roteiro corporativo. Entregável direto pra gravar Reels, YouTube Shorts ou vídeo de processo.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/publicar-tema</span><span class="skill-tag">/aprovar-post</span></div>
+        <div class="card-title">Landing page e site completo</div>
+        <div class="card-desc">O sistema constrói páginas em Astro ou Hugo com blog, portfólio e formulário. Uma LP dedicada a um serviço específico sai com hero, benefícios, depoimentos, FAQ e CTA — deployada automaticamente via Netlify quando o /aprovar-post faz o push.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMUNICAÇÃO -->
+  <div class="category c-comunicacao" id="comunicacao">
+    <div class="cat-header">
+      <div class="cat-dot" style="background:var(--comunicacao)"></div>
+      <div class="cat-title" style="color:var(--comunicacao)">Comunicação</div>
+      <div class="cat-count">4 entregáveis</div>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/email-profissional</span></div>
+        <div class="card-title">Email de primeiro contato com lead</div>
+        <div class="card-desc">Resposta calibrada ao briefing do cliente: tom proporcional à relação, objetivo claro na abertura, uma ação pedida por vez. Lead frio recebe mais cuidado; indicação direta, mais direto. Não parece template — parece escrito pra aquela pessoa.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/email-profissional</span></div>
+        <div class="card-title">Cadência de follow-up</div>
+        <div class="card-desc">Lead sem resposta em 3 dias, proposta sem retorno, reunião não confirmada — cada etapa da cadência com ângulo diferente. Primeiro follow-up retoma contexto, segundo traz insight novo, terceiro fecha o ciclo com leveza. Sem pressão, sem parecer automático.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/relatorio-ads</span><span class="skill-tag">/email-profissional</span></div>
+        <div class="card-title">Email de entrega de relatório</div>
+        <div class="card-desc">Ao final de cada ciclo, o /relatorio-ads gera o relatório e o /email-profissional monta o email de envio: contextualiza os números, destaca o que mais importa, sugere o próximo passo. Cliente recebe resultado + contexto + próxima ação em uma leitura.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/email-profissional</span></div>
+        <div class="card-title">Respostas profissionais em qualquer situação</div>
+        <div class="card-desc">Cobrança atrasada, pedido de desconto, reclamação de prazo, mudança de escopo — oferece duas versões quando o assunto é delicado: direta e suave. Assunto sempre específico, nunca vago. Tom segue preferências.md estritamente.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GESTÃO -->
+  <div class="category c-gestao" id="gestao">
+    <div class="cat-header">
+      <div class="cat-dot" style="background:var(--gestao)"></div>
+      <div class="cat-title" style="color:var(--gestao)">Gestão de Projetos e Skills</div>
+      <div class="cat-count">4 entregáveis</div>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/novo-projeto</span><span class="skill-tag">/seo</span></div>
+        <div class="card-title">Onboarding de novo cliente em um fluxo</div>
+        <div class="card-desc">/novo-projeto cria estrutura de pastas com CLAUDE.md dedicado e briefing.md. Na sequência, /seo faz o diagnóstico completo do nicho. O resultado já é o plano de trabalho dos primeiros meses — sem reunião extra, sem documento separado.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/atualizar</span></div>
+        <div class="card-title">Contexto que se mantém atualizado</div>
+        <div class="card-desc">Varre o workspace e compara os arquivos de memória com o estado real: cliente novo sem registro, prioridade desatualizada no estrategia.md, regra no CLAUDE.md que não bate com a realidade. Propõe mudanças, aplica só o aprovado, sem reformatar o arquivo inteiro.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/salvar</span></div>
+        <div class="card-title">Versionamento e backup automático</div>
+        <div class="card-desc">Detecta o que mudou, gera mensagem de commit descritiva baseada nos arquivos alterados e faz push pro GitHub. Primeiro acesso configura o repositório remoto. Todo trabalho — campanhas, conteúdo, análises, briefings — versionado e acessível de qualquer lugar.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/mapear-rotinas</span></div>
+        <div class="card-title">Sistema que aprende com o uso</div>
+        <div class="card-desc">Transforma qualquer tarefa que se repete em skill própria. Três perguntas — o que repete, qual o input, qual o output — e cria o SKILL.md com workflow estruturado, dependências e regras. A próxima vez que aquela tarefa aparecer, vira um comando.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page-divider"></div>
+
+<!-- ==================== AUTOMAÇÕES ==================== -->
+<div class="section" id="automacoes">
+  <div class="section-header">
+    <div class="section-eyebrow" style="color:var(--conteudo)">02 — Automações</div>
+    <h2>O que o sistema faz<br>sem você pedir</h2>
+    <p class="section-sub">Cada entregável pode ser disparado automaticamente por tempo, evento, performance ou ação do cliente.</p>
+  </div>
+
+  <!-- TEMPO -->
+  <div class="auto-block">
+    <div class="auto-header">
+      <div class="trigger-badge t-tempo">⏱ Tempo</div>
+      <div class="auto-title">Por gatilho de tempo (cron/schedule)</div>
+    </div>
+    <table class="auto-table">
+      <thead><tr><th>Skill</th><th>Quando rodar</th><th>O que entrega automaticamente</th></tr></thead>
+      <tbody>
+        <tr><td class="td-skill" style="color:var(--midia)">/relatorio-ads</td><td class="td-when">Toda segunda às 8h</td><td class="td-what">Relatório consolidado Google + Meta: KPIs, alertas, top/bottom campanhas e 3 recomendações da semana</td></tr>
+        <tr><td class="td-skill" style="color:var(--conteudo)">/publicar-tema</td><td class="td-when">Toda segunda ou quarta</td><td class="td-what">Blog + carrossel + legendas do próximo tema do calendário editorial</td></tr>
+        <tr><td class="td-skill" style="color:var(--visual)">/carrossel</td><td class="td-when">Toda quinta</td><td class="td-what">Stories e Reels da semana seguinte em 9:16, prontos para revisar antes de publicar</td></tr>
+        <tr><td class="td-skill" style="color:var(--seo)">/responder-avaliacoes</td><td class="td-when">Toda sexta</td><td class="td-what">Respostas às reviews da semana, aguardando aprovação antes de colar no GMB</td></tr>
+        <tr><td class="td-skill" style="color:var(--comunicacao)">/email-profissional</td><td class="td-when">Toda sexta</td><td class="td-what">Status semanal pro cliente: o que foi entregue, o que está em andamento, próximo passo</td></tr>
+        <tr><td class="td-skill" style="color:var(--midia)">/meta-ads</td><td class="td-when">Início de cada ciclo (mensal)</td><td class="td-what">Nova campanha completa com públicos atualizados, copies frescas e criativos novos</td></tr>
+        <tr><td class="td-skill" style="color:var(--gestao)">/atualizar</td><td class="td-when">1x por mês</td><td class="td-what">Reconcilia _memoria/ com o estado real do workspace — clientes, prioridades, estrutura</td></tr>
+        <tr><td class="td-skill" style="color:var(--seo)">/seo</td><td class="td-when">1x por trimestre</td><td class="td-what">Revisão de estratégia: concorrência nova, oportunidades de keyword, checklist de monitoramento</td></tr>
+        <tr><td class="td-skill" style="color:var(--gestao)">/salvar</td><td class="td-when">Todo fim de dia</td><td class="td-what">Commit descritivo gerado e push automático de tudo que foi produzido</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- PERFORMANCE -->
+  <div class="auto-block">
+    <div class="auto-header">
+      <div class="trigger-badge t-performance">⚡ Performance</div>
+      <div class="auto-title">Por gatilho de performance (dados disparam ação)</div>
+    </div>
+    <table class="auto-table">
+      <thead><tr><th>Skill</th><th>Gatilho</th><th>O que acontece</th></tr></thead>
+      <tbody>
+        <tr><td class="td-skill" style="color:var(--midia)">/meta-ads</td><td class="td-when">Frequência > 3.0 no Meta</td><td class="td-what">Gera criativos e copies frescos só para o conjunto saturado</td></tr>
+        <tr><td class="td-skill" style="color:var(--visual)">/carrossel</td><td class="td-when">CTR < 0.5% após 1.000 impressões</td><td class="td-what">Gera variação de criativo com ângulo diferente para teste A/B</td></tr>
+        <tr><td class="td-skill" style="color:var(--midia)">/anuncio-google</td><td class="td-when">Keyword com gasto alto e zero conversão</td><td class="td-what">Gera lista de negativas atualizada e RSA novo para substituir</td></tr>
+        <tr><td class="td-skill" style="color:var(--midia)">/relatorio-ads</td><td class="td-when">CPA acima da meta por 2 semanas</td><td class="td-what">Alerta com análise da causa e recomendação de ajuste de público ou criativo</td></tr>
+        <tr><td class="td-skill" style="color:var(--comunicacao)">/email-profissional</td><td class="td-when">Performance fora do normal</td><td class="td-what">Email de alerta pro cliente com contexto e próximo passo sugerido</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- EVENTO -->
+  <div class="auto-block">
+    <div class="auto-header">
+      <div class="trigger-badge t-evento">📂 Evento</div>
+      <div class="auto-title">Por gatilho de evento (arquivo ou dado novo)</div>
+    </div>
+    <table class="auto-table">
+      <thead><tr><th>Skill</th><th>Gatilho</th><th>O que acontece</th></tr></thead>
+      <tbody>
+        <tr><td class="td-skill" style="color:var(--analise)">/analisar-dados</td><td class="td-when">Novo arquivo na pasta dados/</td><td class="td-what">Análise executiva gerada automaticamente — métricas, alertas, 3 recomendações</td></tr>
+        <tr><td class="td-skill" style="color:var(--analise)">/analisar-dados</td><td class="td-when">Export do GA4 ou Search Console</td><td class="td-what">Relatório de tráfego orgânico: páginas top, origem de visitas, keywords com clique</td></tr>
+        <tr><td class="td-skill" style="color:var(--conteudo)">/aprovar-post</td><td class="td-when">Cliente manda "aprovado"</td><td class="td-what">Publica no site + Instagram + Facebook sem mais intervenção</td></tr>
+        <tr><td class="td-skill" style="color:var(--visual)">/carrossel</td><td class="td-when">Tema aprovado no Google Sheets</td><td class="td-what">Gera visual + legenda prontos para revisar</td></tr>
+        <tr><td class="td-skill" style="color:var(--midia)">/meta-ads</td><td class="td-when">Briefing de campanha subido na pasta</td><td class="td-what">Campanha completa gerada: públicos, copies, criativos, configurações</td></tr>
+        <tr><td class="td-skill" style="color:var(--comunicacao)">/email-profissional</td><td class="td-when">Relatório mensal gerado</td><td class="td-what">Email de entrega pro cliente com contexto dos números e próxima ação</td></tr>
+        <tr><td class="td-skill" style="color:var(--gestao)">/salvar</td><td class="td-when">Qualquer arquivo novo ou editado</td><td class="td-what">Commit descritivo gerado e push feito automaticamente</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- APROVAÇÃO -->
+  <div class="auto-block">
+    <div class="auto-header">
+      <div class="trigger-badge t-aprovacao">✅ Aprovação</div>
+      <div class="auto-title">Por gatilho de aprovação (cliente aprova algo)</div>
+    </div>
+    <table class="auto-table">
+      <thead><tr><th>Skill</th><th>O que o cliente aprova</th><th>O que acontece automaticamente</th></tr></thead>
+      <tbody>
+        <tr><td class="td-skill" style="color:var(--conteudo)">/aprovar-post</td><td class="td-when">"Aprovado" no preview do conteúdo</td><td class="td-what">Site publicado, carrossel postado no Instagram e Facebook, LinkedIn entrega texto pronto</td></tr>
+        <tr><td class="td-skill" style="color:var(--midia)">/anuncio-google</td><td class="td-when">Campanha revisada no documento</td><td class="td-what">README de importação enviado + checklist de lançamento</td></tr>
+        <tr><td class="td-skill" style="color:var(--midia)">/meta-ads</td><td class="td-when">Criativos e copies revisados</td><td class="td-what">Guia de setup passo a passo no Ads Manager + checklist de lançamento</td></tr>
+        <tr><td class="td-skill" style="color:var(--comunicacao)">/email-profissional</td><td class="td-when">Rascunho de email aprovado</td><td class="td-what">Email enviado diretamente ao destinatário</td></tr>
+        <tr><td class="td-skill" style="color:var(--visual)">/carrossel</td><td class="td-when">Texto dos slides aprovado</td><td class="td-what">Renderiza PNGs finais e gera legenda automaticamente</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ONBOARDING -->
+  <div class="auto-block">
+    <div class="auto-header">
+      <div class="trigger-badge t-onboarding">🚀 Onboarding</div>
+      <div class="auto-title">Por gatilho de onboarding (cliente novo)</div>
+    </div>
+    <table class="auto-table">
+      <thead><tr><th style="width:52px">#</th><th>Skill</th><th>O que entrega</th></tr></thead>
+      <tbody>
+        <tr><td class="td-order">1</td><td class="td-skill" style="color:var(--gestao)">/novo-projeto</td><td class="td-what">Estrutura de pastas + briefing.md + CLAUDE.md dedicado ao cliente</td></tr>
+        <tr><td class="td-order">2</td><td class="td-skill" style="color:var(--gestao)">/instalar</td><td class="td-what">Contexto completo preenchido em _memoria/: empresa, tom de voz, foco atual</td></tr>
+        <tr><td class="td-order">3</td><td class="td-skill" style="color:var(--seo)">/seo</td><td class="td-what">Diagnóstico completo: demanda, concorrência, GMB, on-page, estratégia de conteúdo</td></tr>
+        <tr><td class="td-order">4</td><td class="td-skill" style="color:var(--midia)">/anuncio-google</td><td class="td-what">Campanha Search pronta para importar no Google Ads Editor</td></tr>
+        <tr><td class="td-order">5</td><td class="td-skill" style="color:var(--midia)">/meta-ads</td><td class="td-what">Campanha Meta completa: públicos, copies, criativos e guia de setup</td></tr>
+        <tr><td class="td-order">6+</td><td class="td-skill" style="color:var(--conteudo)">/publicar-tema</td><td class="td-what">Pipeline editorial semanal rodando com os temas da estratégia do /seo</td></tr>
+      </tbody>
+    </table>
+    <div style="margin-top:12px; padding:14px 18px; background:var(--surface2); border-radius:8px; border:1px solid var(--border); font-size:12px; color:var(--muted2);">
+      💡 <strong style="color:var(--text)">Esse fluxo inteiro pode rodar com um único formulário de briefing como gatilho.</strong> O cliente preenche, o sistema entrega o plano de trabalho dos próximos meses.
+    </div>
+  </div>
+
+  <!-- LEAD -->
+  <div class="auto-block">
+    <div class="auto-header">
+      <div class="trigger-badge t-lead">👤 Lead</div>
+      <div class="auto-title">Por gatilho de lead (alguém entra em contato)</div>
+    </div>
+    <table class="auto-table">
+      <thead><tr><th>Skill</th><th>Gatilho</th><th>O que acontece</th></tr></thead>
+      <tbody>
+        <tr><td class="td-skill" style="color:var(--comunicacao)">/email-profissional</td><td class="td-when">Novo lead no formulário do site</td><td class="td-what">Email de resposta inicial gerado no tom calibrado do cliente e enviado automaticamente</td></tr>
+        <tr><td class="td-skill" style="color:var(--comunicacao)">/email-profissional</td><td class="td-when">Sem resposta após 3 dias</td><td class="td-what">Email de follow-up com ângulo novo gerado e enviado</td></tr>
+        <tr><td class="td-skill" style="color:var(--comunicacao)">/email-profissional</td><td class="td-when">Proposta sem retorno após 5 dias</td><td class="td-what">Email de retomada gerado — leve, sem pressão, com um insight novo</td></tr>
+        <tr><td class="td-skill" style="color:var(--midia)">/meta-ads</td><td class="td-when">Lead visita o site mas não converte</td><td class="td-what">Conjunto de retargeting gerado com criativo e copy específicos para quem já conhece</td></tr>
+        <tr><td class="td-skill" style="color:var(--analise)">/analisar-dados</td><td class="td-when">Lead fecha e vira cliente</td><td class="td-what">Análise do perfil do cliente para calibrar _memoria/ e afinar próximas campanhas</td></tr>
+        <tr><td class="td-skill" style="color:var(--visual)">/carrossel</td><td class="td-when">Lead segue o perfil mas não contata</td><td class="td-what">Sequência de conteúdo educativo gerada para nutrir antes da abordagem direta</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="page-divider"></div>
+
+<!-- ==================== FLUXO COMPLETO ==================== -->
+<div class="section" id="fluxo">
+  <div class="section-header">
+    <div class="section-eyebrow" style="color:var(--gestao)">03 — Fluxo Completo</div>
+    <h2>Do tema ao cliente fechado<br>sem intervenção manual</h2>
+    <p class="section-sub">O pipeline mais completo do sistema — conteúdo publicado em 4 canais, campanha renovada quando satura, lead respondido em minutos.</p>
+  </div>
+
+  <div class="flow-wrap">
+    <div class="flow-pipeline">
+
+      <div class="flow-step">
+        <div class="flow-icon">📋</div>
+        <div class="flow-body">
+          <div class="flow-label">Entrada</div>
+          <div class="flow-action">Google Sheets — calendário editorial + briefing</div>
+          <div class="flow-detail">Cliente preenche o tema da semana e os dados de campanha. n8n monitora a planilha e dispara o pipeline toda segunda às 8h.</div>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-icon">🔀</div>
+        <div class="flow-body">
+          <div class="flow-label">Paralelo</div>
+          <div class="flow-action">Conteúdo + Relatório rodando ao mesmo tempo</div>
+          <div class="flow-detail">n8n dispara duas tarefas em paralelo: /publicar-tema gera blog + carrossel + legendas; /relatorio-ads processa os exports da semana anterior.</div>
+          <div class="flow-tags">
+            <span class="skill-pill">/publicar-tema</span>
+            <span class="skill-pill">/relatorio-ads</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-icon">⚠️</div>
+        <div class="flow-body">
+          <div class="flow-label">Inteligência</div>
+          <div class="flow-action">Relatório detecta frequência > 3.0 no Meta</div>
+          <div class="flow-detail">O /relatorio-ads identifica conjunto saturado. Dispara automaticamente o /meta-ads para gerar criativos e copies frescos só para aquele conjunto.</div>
+          <div class="flow-tags">
+            <span class="skill-pill">/meta-ads</span>
+            <span class="skill-pill">/carrossel</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-icon">📲</div>
+        <div class="flow-body">
+          <div class="flow-label">Aprovação</div>
+          <div class="flow-action">n8n envia preview para o WhatsApp do cliente</div>
+          <div class="flow-detail">Preview do conteúdo da semana + resumo do relatório + alerta dos criativos novos. Uma mensagem, tudo junto.</div>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-icon">✅</div>
+        <div class="flow-body">
+          <div class="flow-label">Gatilho</div>
+          <div class="flow-action">Cliente responde "ok"</div>
+          <div class="flow-detail">Uma palavra dispara o restante do pipeline. Sem reunião, sem email, sem follow-up.</div>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-icon">🌐</div>
+        <div class="flow-body">
+          <div class="flow-label">Publicação</div>
+          <div class="flow-action">/aprovar-post publica em 4 canais simultaneamente</div>
+          <div class="flow-detail">Site publicado via Netlify/Vercel, carrossel postado no Instagram, carrossel postado no Facebook via Meta Graph API, texto de LinkedIn entregue pronto para colar.</div>
+          <div class="flow-tags">
+            <span class="skill-pill">/aprovar-post</span>
+            <span class="skill-pill">/email-profissional</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-icon">👤</div>
+        <div class="flow-body">
+          <div class="flow-label">Conversão</div>
+          <div class="flow-action">Novo lead entra pelo site ou pelo anúncio</div>
+          <div class="flow-detail">/email-profissional responde em minutos no tom do cliente. Se o lead visitar o site sem converter, /meta-ads cria conjunto de retargeting com copy específica para quem já conhece.</div>
+          <div class="flow-tags">
+            <span class="skill-pill">/email-profissional</span>
+            <span class="skill-pill">/meta-ads</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-icon">💾</div>
+        <div class="flow-body">
+          <div class="flow-label">Encerramento</div>
+          <div class="flow-action">/salvar fecha o ciclo com commit automático</div>
+          <div class="flow-detail">Todo o trabalho da semana — conteúdo, relatório, criativos, emails — versionado no GitHub com mensagem de commit descritiva gerada automaticamente.</div>
+          <div class="flow-tags">
+            <span class="skill-pill">/salvar</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="page-divider"></div>
+
+<!-- ==================== BÔNUS ==================== -->
+<div class="section" id="bonus">
+  <div class="section-header">
+    <div class="section-eyebrow" style="color:#F97316">Bônus — Em desenvolvimento</div>
+    <h2>O que o sistema ainda<br>não faz — mas <span style="background:linear-gradient(120deg,#F97316,#EF4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">pode fazer</span></h2>
+    <p class="section-sub">Entregáveis de alto impacto que ainda não têm skill dedicada — os próximos a construir.</p>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px;">
+
+    <div style="background:var(--surface);border:1px solid rgba(249,115,22,0.2);border-radius:16px;padding:28px;position:relative;overflow:hidden;">
+      <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:#F97316;border-radius:3px 0 0 3px;"></div>
+      <div style="display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;background:rgba(249,115,22,0.12);color:#F97316;padding:3px 10px;border-radius:20px;margin-bottom:16px;">
+        Em breve
+      </div>
+      <div style="font-size:16px;font-weight:800;letter-spacing:-0.02em;margin-bottom:10px;">Email Marketing e Nutrição de Leads</div>
+      <div style="font-size:13px;color:var(--muted2);line-height:1.65;margin-bottom:16px;">O sistema tem <code style="font-size:11px;background:var(--surface2);padding:1px 5px;border-radius:3px;color:var(--muted2);">/email-profissional</code> para emails pontuais, mas nada de automação de sequências. Um lead que entra pelo site poderia receber: boas-vindas → portfólio → depoimento → CTA para consulta — tudo no piloto automático.</div>
+      <div style="background:var(--surface2);border-radius:10px;padding:14px 16px;">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:var(--muted);margin-bottom:8px;">Skill a construir</div>
+        <div style="font-family:'Courier New',monospace;font-size:12px;font-weight:700;color:#F97316;margin-bottom:6px;">/sequencia-email</div>
+        <div style="font-size:12px;color:var(--muted2);line-height:1.5;">Monta sequência de nutrição completa: define etapas, escreve cada email, exporta para Mailchimp, RD Station ou ActiveCampaign.</div>
+      </div>
+    </div>
+
+    <div style="background:var(--surface);border:1px solid rgba(249,115,22,0.2);border-radius:16px;padding:28px;position:relative;overflow:hidden;">
+      <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:#F97316;border-radius:3px 0 0 3px;"></div>
+      <div style="display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;background:rgba(249,115,22,0.12);color:#F97316;padding:3px 10px;border-radius:20px;margin-bottom:16px;">
+        Em breve
+      </div>
+      <div style="font-size:16px;font-weight:800;letter-spacing:-0.02em;margin-bottom:10px;">WhatsApp como Canal de Conversão</div>
+      <div style="font-size:13px;color:var(--muted2);line-height:1.65;margin-bottom:16px;">Muito relevante no Brasil. Hoje o contato é por formulário ou DM — mas um fluxo estruturado de primeiro atendimento via WhatsApp (boas-vindas automática, qualificação rápida, CTA para agendar) aumenta significativamente a taxa de resposta. Não existe skill para montar isso.</div>
+      <div style="background:var(--surface2);border-radius:10px;padding:14px 16px;">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:var(--muted);margin-bottom:8px;">Skill a construir</div>
+        <div style="font-family:'Courier New',monospace;font-size:12px;font-weight:700;color:#F97316;margin-bottom:6px;">/fluxo-whatsapp</div>
+        <div style="font-size:12px;color:var(--muted2);line-height:1.5;">Desenha o fluxo de atendimento: mensagem de boas-vindas, perguntas de qualificação, script de resposta rápida e CTA para agendamento. Integrável com WhatsApp Business API e Zapier.</div>
+      </div>
+    </div>
+
+    <div style="background:var(--surface);border:1px solid rgba(249,115,22,0.2);border-radius:16px;padding:28px;position:relative;overflow:hidden;">
+      <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:#F97316;border-radius:3px 0 0 3px;"></div>
+      <div style="display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;background:rgba(249,115,22,0.12);color:#F97316;padding:3px 10px;border-radius:20px;margin-bottom:16px;">
+        Em breve
+      </div>
+      <div style="font-size:16px;font-weight:800;letter-spacing:-0.02em;margin-bottom:10px;">Proposta Comercial e Qualificação de Lead</div>
+      <div style="font-size:13px;color:var(--muted2);line-height:1.65;margin-bottom:16px;">O fluxo atual vai até atrair o lead. Mas fechar passa por proposta, follow-up e qualificação. Não existe skill para montar proposta em PDF, script de primeiro contato ou cadência de follow-up para lead que não respondeu.</div>
+      <div style="background:var(--surface2);border-radius:10px;padding:14px 16px;">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:var(--muted);margin-bottom:8px;">Skill a construir</div>
+        <div style="font-family:'Courier New',monospace;font-size:12px;font-weight:700;color:#F97316;margin-bottom:6px;">/proposta-comercial</div>
+        <div style="font-size:12px;color:var(--muted2);line-height:1.5;">Gera proposta completa em HTML/PDF: escopo, entregáveis por fase, prazo e investimento. Inclui script de qualificação e cadência de follow-up para leads que não responderam.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <strong>Automa Labs</strong> — Módulo de Marketing Digital &nbsp;·&nbsp; 2026
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,668 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Automa Labs — Gerador de Oportunidades</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0C0E14;
+  --surface: #13161F;
+  --surface2: #1C2030;
+  --border: rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.13);
+  --text: #F0F2F8;
+  --muted: #5A6170;
+  --muted2: #9CA3AF;
+  --email: #3B82F6;
+  --whatsapp: #10B981;
+  --retargeting: #F97316;
+  --vendas: #8B5CF6;
+  --fechamento: #EF4444;
+  --social: #F59E0B;
+  --analise: #EC4899;
+  --infra: #64748B;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; font-size: 15px; }
+
+nav { position: sticky; top: 0; z-index: 100; background: rgba(12,14,20,0.94); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 0 48px; display: flex; align-items: center; gap: 4px; height: 54px; }
+.nav-brand { font-weight: 900; font-size: 14px; color: var(--text); letter-spacing: -0.02em; margin-right: 20px; white-space: nowrap; }
+.nav-brand span { color: var(--email); }
+nav a { color: var(--muted2); text-decoration: none; font-size: 13px; font-weight: 500; padding: 5px 11px; border-radius: 6px; transition: all 0.15s; white-space: nowrap; }
+nav a:hover { color: var(--text); background: var(--surface2); }
+.nav-sep { width: 1px; height: 18px; background: var(--border2); margin: 0 6px; }
+.nav-pill { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 10px; border-radius: 20px; margin-left: auto; background: rgba(59,130,246,0.12); color: var(--email); white-space: nowrap; }
+
+.hero { padding: 80px 48px 64px; max-width: 1200px; margin: 0 auto; }
+.hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.26em; text-transform: uppercase; color: var(--email); margin-bottom: 18px; }
+.hero h1 { font-size: 72px; font-weight: 900; letter-spacing: -0.04em; line-height: 0.96; margin-bottom: 24px; }
+.hero h1 .grad { background: linear-gradient(120deg, var(--email) 0%, var(--vendas) 50%, var(--analise) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero-sub { font-size: 17px; color: var(--muted2); max-width: 560px; line-height: 1.65; font-weight: 400; margin-bottom: 0; }
+
+.page-divider { height: 1px; background: var(--border); margin: 0 48px; }
+
+.section { padding: 72px 48px; max-width: 1200px; margin: 0 auto; }
+.section-header { margin-bottom: 52px; }
+.section-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.26em; text-transform: uppercase; margin-bottom: 10px; }
+.section h2 { font-size: 44px; font-weight: 900; letter-spacing: -0.035em; line-height: 1.08; }
+.section-sub { font-size: 15px; color: var(--muted2); margin-top: 10px; max-width: 560px; }
+
+.category { margin-bottom: 64px; }
+.cat-header { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+.cat-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.cat-title { font-size: 18px; font-weight: 800; letter-spacing: -0.02em; }
+.cat-sub { font-size: 13px; color: var(--muted2); margin-bottom: 20px; max-width: 640px; line-height: 1.6; }
+
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 14px; margin-bottom: 20px; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 22px; position: relative; overflow: hidden; transition: border-color 0.2s, transform 0.2s; }
+.card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; }
+.card:hover { border-color: var(--border2); transform: translateY(-1px); }
+.card-skills { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 11px; }
+.skill-tag { display: inline-block; font-size: 10px; font-weight: 700; font-family: 'Courier New', monospace; padding: 2px 7px; border-radius: 4px; }
+.card-title { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 7px; letter-spacing: -0.01em; line-height: 1.35; }
+.card-desc { font-size: 12.5px; color: var(--muted2); line-height: 1.65; }
+
+.c-email .card::before { background: var(--email); }
+.c-email .skill-tag { background: rgba(59,130,246,0.13); color: var(--email); }
+.c-whatsapp .card::before { background: var(--whatsapp); }
+.c-whatsapp .skill-tag { background: rgba(16,185,129,0.13); color: var(--whatsapp); }
+.c-retargeting .card::before { background: var(--retargeting); }
+.c-retargeting .skill-tag { background: rgba(249,115,22,0.13); color: var(--retargeting); }
+.c-vendas .card::before { background: var(--vendas); }
+.c-vendas .skill-tag { background: rgba(139,92,246,0.13); color: var(--vendas); }
+.c-fechamento .card::before { background: var(--fechamento); }
+.c-fechamento .skill-tag { background: rgba(239,68,68,0.13); color: var(--fechamento); }
+.c-social .card::before { background: var(--social); }
+.c-social .skill-tag { background: rgba(245,158,11,0.13); color: var(--social); }
+.c-analise .card::before { background: var(--analise); }
+.c-analise .skill-tag { background: rgba(236,72,153,0.13); color: var(--analise); }
+
+.flow-box { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 22px 26px; margin-bottom: 16px; }
+.flow-box-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.18em; color: var(--muted); margin-bottom: 14px; }
+.flow-row { display: flex; align-items: flex-start; gap: 10px; font-size: 12.5px; margin-bottom: 6px; }
+.flow-row-indent { padding-left: 28px; }
+.flow-row-arrow { color: var(--muted); font-size: 11px; padding-left: 16px; margin: 2px 0; }
+.flow-icon { flex-shrink: 0; font-size: 14px; margin-top: 1px; }
+.flow-text { color: var(--muted2); line-height: 1.55; }
+.flow-text strong { color: var(--text); font-weight: 600; }
+
+.seq-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; margin-bottom: 20px; }
+.seq-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; }
+.seq-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 8px; }
+.seq-items { display: flex; flex-direction: column; gap: 4px; }
+.seq-item { font-size: 11.5px; color: var(--muted2); display: flex; gap: 7px; line-height: 1.5; }
+.seq-item-day { font-weight: 700; color: var(--muted); min-width: 32px; flex-shrink: 0; }
+
+.timeline { display: flex; flex-direction: column; gap: 6px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px 24px; margin-bottom: 16px; }
+.timeline-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.18em; color: var(--muted); margin-bottom: 10px; }
+.tl-row { display: flex; gap: 14px; align-items: flex-start; font-size: 12.5px; }
+.tl-day { font-weight: 700; color: var(--muted); min-width: 44px; flex-shrink: 0; font-family: 'Courier New', monospace; font-size: 11px; padding-top: 2px; }
+.tl-text { color: var(--muted2); line-height: 1.5; }
+.tl-text strong { color: var(--text); }
+
+.stack-table { width: 100%; border-collapse: collapse; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+.stack-table thead tr { border-bottom: 1px solid var(--border); }
+.stack-table th { padding: 11px 20px; text-align: left; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.16em; color: var(--muted); background: var(--surface); }
+.stack-table tbody tr { border-bottom: 1px solid var(--border); transition: background 0.12s; }
+.stack-table tbody tr:last-child { border-bottom: none; }
+.stack-table tbody tr:hover { background: var(--surface2); }
+.stack-table td { padding: 13px 20px; font-size: 13px; vertical-align: top; }
+.stack-table td:first-child { color: var(--muted2); font-size: 12px; white-space: nowrap; }
+.stack-table td:nth-child(2) { font-weight: 700; color: var(--text); }
+.stack-table td:nth-child(3) { color: var(--muted2); font-size: 12.5px; }
+
+.skills-map { display: flex; flex-direction: column; gap: 14px; }
+.skills-row { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+.skills-row-head { display: flex; align-items: center; gap: 12px; padding: 15px 22px; border-bottom: 1px solid var(--border); }
+.skills-row-name { font-size: 14px; font-weight: 800; letter-spacing: -0.01em; }
+.skills-row-count { display: none; }
+.skills-list { display: flex; flex-wrap: wrap; gap: 10px; padding: 16px 22px; }
+.skill-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; min-width: 190px; }
+.skill-item-name { font-family: 'Courier New', monospace; font-size: 11px; font-weight: 700; margin-bottom: 3px; }
+.skill-item-desc { font-size: 11px; color: var(--muted2); line-height: 1.4; }
+.skill-pill { display: inline-block; font-family: 'Courier New', monospace; font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px; background: var(--surface2); color: var(--muted2); border: 1px solid var(--border); }
+
+.phase-badge { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; padding: 4px 11px; border-radius: 20px; }
+
+.qs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+.qs-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 24px; }
+.qs-num { font-size: 44px; font-weight: 900; letter-spacing: -0.04em; line-height: 1; margin-bottom: 12px; }
+.qs-when { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.16em; color: var(--muted); margin-bottom: 6px; }
+.qs-action { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 6px; line-height: 1.3; }
+.qs-detail { font-size: 12px; color: var(--muted2); line-height: 1.6; }
+
+footer { padding: 36px 48px; text-align: center; color: var(--muted); font-size: 12px; border-top: 1px solid var(--border); }
+footer strong { color: var(--muted2); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">Automa<span>Labs</span></div>
+  <a href="#stack">Stack</a>
+  <div class="nav-sep"></div>
+  <a href="#email">E-mail</a>
+  <a href="#whatsapp">WhatsApp</a>
+  <a href="#retargeting">Retargeting</a>
+  <a href="#vendas">Vendas</a>
+  <a href="#fechamento">Fechamento</a>
+  <a href="#social">Prova Social</a>
+  <a href="#analise">Análise</a>
+  <div class="nav-sep"></div>
+  <a href="#skills-map">Skills</a>
+  <a href="#quickstart">Início</a>
+  <div class="nav-pill">Gerador de Oportunidades</div>
+</nav>
+
+<div class="hero">
+  <div class="hero-eyebrow">Gerador de Oportunidades</div>
+  <h1>Tudo que o sistema<br>pode <span class="grad">entregar.</span></h1>
+  <p class="hero-sub">Estratégia completa de meio e fundo de funil — da nutrição de leads ao fechamento de clientes, com IA e automações em cada etapa.</p>
+</div>
+
+
+<div class="page-divider"></div>
+
+<!-- STACK -->
+<div class="section" id="stack">
+  <div class="section-header">
+    <div class="section-eyebrow" style="color:var(--infra)">Pré-requisitos</div>
+    <h2>Stack técnico necessário</h2>
+    <p class="section-sub">Antes de construir qualquer skill, essas ferramentas precisam estar configuradas e conectadas.</p>
+  </div>
+  <table class="stack-table">
+    <thead><tr><th>Função</th><th>Ferramenta</th><th>Por quê</th></tr></thead>
+    <tbody>
+      <tr><td>Email marketing</td><td>ActiveCampaign</td><td>Melhor automação comportamental do mercado — triggers por abertura, clique e comportamento no site</td></tr>
+      <tr><td>WhatsApp API</td><td>Z-API</td><td>Mais simples de configurar no Brasil, documentação em português, custo acessível</td></tr>
+      <tr><td>Agendamento</td><td>Cal.com</td><td>Gratuito, integra nativamente com n8n e WhatsApp — lead agenda sozinho após qualificação</td></tr>
+      <tr><td>CRM</td><td>HubSpot free ou Notion</td><td>HubSpot se quiser pipeline nativo com automação, Notion se quiser estrutura simples e flexível</td></tr>
+      <tr><td>Transcrição de reuniões</td><td>Whisper API (OpenAI)</td><td>Transcreve gravações de reunião para texto — insumo para o /analisar-reuniao</td></tr>
+      <tr><td>Orquestrador</td><td>n8n (self-hosted)</td><td>Conecta todas as ferramentas — já planejado no Módulo de Marketing</td></tr>
+      <tr><td>Assinatura digital</td><td>ClickSign</td><td>Validade jurídica no Brasil — integra com propostas geradas pelo /proposta-comercial</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="page-divider"></div>
+
+<!-- MEIO DE FUNIL -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-eyebrow" style="color:var(--email)">01 — Meio de Funil</div>
+    <h2>Nutrição e engajamento<br>de leads</h2>
+    <p class="section-sub">Educar, criar autoridade e mover o lead em direção à decisão — sem depender de interação manual a cada etapa.</p>
+  </div>
+
+  <!-- EMAIL -->
+  <div class="category c-email" id="email">
+    <div class="cat-header">
+      <div class="cat-dot" style="background:var(--email)"></div>
+      <div class="cat-title" style="color:var(--email)">Canal 1 — E-mail Marketing e Automações</div>
+    </div>
+    <p class="cat-sub">O canal de maior ROI do meio de funil. Base de relacionamento de longo prazo — funciona enquanto os outros canais dormem.</p>
+
+    <div class="cards">
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/sequencia-email</span></div>
+        <div class="card-title">Email Sequence Generator</div>
+        <div class="card-desc">Recebe persona, produto, objeções principais e tom de voz → gera a sequência completa de emails com subject, preview text, corpo e CTA. Framework AIDA, PAS ou StoryBrand aplicado conforme o objetivo. Pronto para colar no ActiveCampaign.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/subject-line</span></div>
+        <div class="card-title">Subject Line A/B Generator</div>
+        <div class="card-desc">Gera 10 variações de assunto com preview text para cada email da sequência. Inclui previsão de abertura relativa por variação e recomendação de qual testar primeiro. Integra com o teste A/B nativo do ActiveCampaign.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/newsletter-semanal</span></div>
+        <div class="card-title">Newsletter Weekly Generator</div>
+        <div class="card-desc">Recebe lista de links e temas da semana → gera email completo com curadoria do setor, dica prática, case e CTA suave. Tom calibrado por cliente, pronto para enviar em minutos. Mantém o relacionamento com toda a base de forma constante.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/analisar-email</span></div>
+        <div class="card-title">Email Performance Analyzer</div>
+        <div class="card-desc">Recebe relatório de abertura e clique por email → identifica os com baixa performance (abertura abaixo de 25%, clique abaixo de 2%) e sugere reescritas de subject line e corpo. Melhoria contínua das sequências sem esforço manual.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/reengajamento</span></div>
+        <div class="card-title">Reengagement Campaign Creator</div>
+        <div class="card-desc">Identifica inativos por segmento — 30, 60 ou 90 dias sem interação — e gera sequência de retorno personalizada por perfil. Cada segmento recebe ângulo diferente, não disparo genérico para toda a base.</div>
+      </div>
+    </div>
+
+    <div class="seq-grid">
+      <div class="seq-card">
+        <div class="seq-label" style="color:var(--email)">Sequência 1 — Boas-vindas</div>
+        <div class="seq-items">
+          <div class="seq-item"><span class="seq-item-day">E1</span>Entrega do material + apresentação da marca</div>
+          <div class="seq-item"><span class="seq-item-day">E2</span>Conteúdo complementar + história da empresa</div>
+          <div class="seq-item"><span class="seq-item-day">E3</span>Dica prática relacionada ao lead magnet</div>
+          <div class="seq-item"><span class="seq-item-day">E4</span>Case de sucesso de cliente similar</div>
+          <div class="seq-item"><span class="seq-item-day">E5</span>Quebra de objeção principal do setor</div>
+          <div class="seq-item"><span class="seq-item-day">E6</span>CTA para diagnóstico gratuito ou próximo passo</div>
+        </div>
+      </div>
+      <div class="seq-card">
+        <div class="seq-label" style="color:var(--email)">Sequência 2 — Newsletter</div>
+        <div class="seq-items">
+          <div class="seq-item"><span class="seq-item-day">Sem.</span>1 email semanal recorrente</div>
+          <div class="seq-item"><span class="seq-item-day">—</span>Curadoria do setor</div>
+          <div class="seq-item"><span class="seq-item-day">—</span>Dica prática</div>
+          <div class="seq-item"><span class="seq-item-day">—</span>Case de resultado</div>
+          <div class="seq-item"><span class="seq-item-day">—</span>CTA suave para próximo passo</div>
+        </div>
+      </div>
+      <div class="seq-card">
+        <div class="seq-label" style="color:var(--email)">Sequência 3 — Reengajamento</div>
+        <div class="seq-items">
+          <div class="seq-item"><span class="seq-item-day">E1</span>"Ainda faz sentido pra você?" + conteúdo de valor</div>
+          <div class="seq-item"><span class="seq-item-day">+3d</span>Oferta especial ou acesso exclusivo</div>
+          <div class="seq-item"><span class="seq-item-day">+3d</span>"Este é meu último email" + CTA direto</div>
+          <div class="seq-item"><span class="seq-item-day">—</span>Sem resposta: lista inativa ou remoção</div>
+        </div>
+      </div>
+      <div class="seq-card">
+        <div class="seq-label" style="color:var(--email)">Sequência 4 — Pós-evento</div>
+        <div class="seq-items">
+          <div class="seq-item"><span class="seq-item-day">E1</span>Agradecimento + replay do evento</div>
+          <div class="seq-item"><span class="seq-item-day">+2d</span>Principais insights + recursos citados</div>
+          <div class="seq-item"><span class="seq-item-day">+4d</span>Oferta especial para participantes</div>
+          <div class="seq-item"><span class="seq-item-day">+7d</span>Último lembrete da oferta</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flow-box">
+      <div class="flow-box-label">Fluxo de produção com IA</div>
+      <div class="flow-row"><div class="flow-icon">1️⃣</div><div class="flow-text"><strong>Claude recebe:</strong> persona, produto, objeções principais, tom de voz</div></div>
+      <div class="flow-row"><div class="flow-icon">2️⃣</div><div class="flow-text"><strong>Claude gera:</strong> sequência completa (subject, preview text, corpo, CTA)</div></div>
+      <div class="flow-row"><div class="flow-icon">3️⃣</div><div class="flow-text"><strong>Humano revisa</strong> e aprova cada email antes de ativar</div></div>
+      <div class="flow-row"><div class="flow-icon">4️⃣</div><div class="flow-text"><strong>n8n + ActiveCampaign:</strong> configura automação com triggers e condicionais</div></div>
+      <div class="flow-row"><div class="flow-icon">5️⃣</div><div class="flow-text"><strong>Mensalmente:</strong> Claude analisa taxas de abertura e clique por email + sugere ajustes</div></div>
+    </div>
+  </div>
+
+  <!-- WHATSAPP -->
+  <div class="category c-whatsapp" id="whatsapp">
+    <div class="cat-header">
+      <div class="cat-dot" style="background:var(--whatsapp)"></div>
+      <div class="cat-title" style="color:var(--whatsapp)">Canal 2 — WhatsApp e Automações de Conversação</div>
+    </div>
+    <p class="cat-sub">O canal de maior taxa de resposta no Brasil. Qualifica leads em tempo real e agenda reuniões automaticamente — sem intervenção humana na triagem.</p>
+
+    <div class="cards">
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/qualificador-whatsapp</span></div>
+        <div class="card-title">WhatsApp Qualification Bot</div>
+        <div class="card-desc">Conversa de 5 perguntas adaptativas por setor → classifica o lead em quente, morno ou frio e gera resumo completo do perfil para o vendedor. Não parece formulário — as perguntas fluem como conversa natural.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/lead-scorer</span></div>
+        <div class="card-title">Lead Scorer WhatsApp</div>
+        <div class="card-desc">Respostas da qualificação → score numérico + próximo passo recomendado: agendar call via Cal.com (quente), entrar em sequência de nutrição WhatsApp (morno) ou sequência de email longo prazo (frio).</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/copy-whatsapp</span></div>
+        <div class="card-title">WhatsApp Copy Writer</div>
+        <div class="card-desc">Mensagens curtas, diretas, no tom correto da marca. Versões por etapa do funil: boas-vindas, nutrição espaçada (a cada 3–5 dias), urgência e encerramento. Cada mensagem com no máximo 3 linhas — nunca parecem disparo em massa.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/copy-whatsapp</span></div>
+        <div class="card-title">Broadcast Campaign Creator</div>
+        <div class="card-desc">Gera mensagem de campanha segmentada por comportamento — quem baixou um lead magnet específico, quem não abriu os últimos 3 emails, quem visitou a página de preços. Cada segmento recebe mensagem personalizada com contexto.</div>
+      </div>
+    </div>
+
+    <div class="flow-box">
+      <div class="flow-box-label">Fluxo de qualificação automática</div>
+      <div class="flow-row"><div class="flow-icon">⬇️</div><div class="flow-text"><strong>Lead entra no funil</strong> → recebe mensagem de boas-vindas no WhatsApp</div></div>
+      <div class="flow-row flow-row-indent"><div class="flow-icon">🤖</div><div class="flow-text">Claude API (via n8n): faz 5 perguntas adaptativas de qualificação</div></div>
+      <div class="flow-row flow-row-indent"><div class="flow-icon">🧮</div><div class="flow-text">Claude classifica: <strong>quente / morno / frio</strong> com score e resumo do perfil</div></div>
+      <div class="flow-row-arrow">↓ se QUENTE</div>
+      <div class="flow-row flow-row-indent"><div class="flow-icon">📅</div><div class="flow-text">Cal.com: envia link de agendamento + vendedor recebe briefing do lead + HubSpot move para "Qualificado"</div></div>
+      <div class="flow-row-arrow">↓ se MORNO</div>
+      <div class="flow-row flow-row-indent"><div class="flow-icon">💬</div><div class="flow-text">Sequência de nutrição WhatsApp (mensagens a cada 3–5 dias) + email continua normalmente</div></div>
+      <div class="flow-row-arrow">↓ se FRIO</div>
+      <div class="flow-row flow-row-indent"><div class="flow-icon">📧</div><div class="flow-text">Apenas email de longo prazo + WhatsApp silêncio por 30 dias → reengajamento</div></div>
+    </div>
+  </div>
+
+  <!-- RETARGETING -->
+  <div class="category c-retargeting" id="retargeting">
+    <div class="cat-header">
+      <div class="cat-dot" style="background:var(--retargeting)"></div>
+      <div class="cat-title" style="color:var(--retargeting)">Canal 3 — Retargeting e Conteúdo Pago para Base</div>
+    </div>
+    <p class="cat-sub">Anúncios que falam com quem já conhece a marca — custo menor, conversão maior, mensagem sob medida para quem está no meio do caminho.</p>
+
+    <div class="cards">
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/meta-ads</span></div>
+        <div class="card-title">Retargeting Ad Generator</div>
+        <div class="card-desc">Copy específico para quem já conhece a marca — visitantes do site, engajadores do Instagram, leads que baixaram o lead magnet mas não converteram. Ângulo completamente diferente do anúncio de topo de funil: já sabe quem é a empresa, foco na objeção ou no próximo passo.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/meta-ads</span></div>
+        <div class="card-title">Lookalike Audience Builder</div>
+        <div class="card-desc">Exporta lista dos melhores clientes (os que fecharam e geraram resultado) → cria audiência similar no Meta. Público que se comporta como quem já comprou — taxa de conversão significativamente maior do que segmentação por interesse.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/carrossel</span><span class="skill-tag">/meta-ads</span></div>
+        <div class="card-title">Dynamic Ad Copy Rotator</div>
+        <div class="card-desc">Gera múltiplas variações de criativo e copy para rotacionar automaticamente quando a frequência passa de 2.5 — evita fadiga de anúncio sem precisar criar do zero. O relatório detecta, o sistema já tem a variação pronta para subir.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page-divider"></div>
+
+<!-- FUNDO DE FUNIL -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-eyebrow" style="color:var(--vendas)">02 — Fundo de Funil</div>
+    <h2>Conversão e fechamento</h2>
+    <p class="section-sub">Transformar lead qualificado em cliente — do agendamento da reunião à proposta assinada, com IA em cada etapa do processo.</p>
+  </div>
+
+  <!-- VENDAS -->
+  <div class="category c-vendas" id="vendas">
+    <div class="cat-header">
+      <div class="cat-dot" style="background:var(--vendas)"></div>
+      <div class="cat-title" style="color:var(--vendas)">Canal 1 — Processo de Vendas Assistido por IA</div>
+    </div>
+    <p class="cat-sub">Da reunião agendada ao onboarding automático — cada etapa do processo de venda com um entregável de IA que economiza tempo e aumenta a qualidade.</p>
+
+    <div class="cards">
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/brief-pre-call</span></div>
+        <div class="card-title">Pre-Call Research Brief</div>
+        <div class="card-desc">Recebe site, CNPJ ou nome da empresa → gera relatório de pesquisa completo com contexto do negócio, possíveis dores do setor e roteiro de perguntas calibrado para a reunião. Vendedor entra na call sabendo com quem está falando e o que perguntar.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/analisar-reuniao</span></div>
+        <div class="card-title">Meeting Transcription Analyzer</div>
+        <div class="card-desc">Recebe a transcrição gerada pelo Whisper → extrai dores levantadas, objeções explícitas e implícitas, nível de interesse, próximo passo sugerido e score de fechamento. Tudo que foi dito na call vira dado estruturado em minutos.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/proposta-comercial</span></div>
+        <div class="card-title">Commercial Proposal Builder</div>
+        <div class="card-desc">Recebe o brief da reunião e a análise da transcrição → gera proposta personalizada em HTML/PDF com escopo, entregáveis por fase, prazo e investimento. Proposta com o nome do cliente, as dores que ele mencionou e os resultados que ele quer — pronta em 5 minutos após a call.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/follow-up-reuniao</span></div>
+        <div class="card-title">Follow-up Personalizer</div>
+        <div class="card-desc">Recebe o contexto completo da call → gera mensagem de acompanhamento personalizada para email e WhatsApp no dia seguinte. Referencia o que foi dito na reunião — não parece template, parece que foi escrito por quem participou da call.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/handler-objecoes</span></div>
+        <div class="card-title">Objection Handler</div>
+        <div class="card-desc">Recebe objeção específica levantada pelo lead → sugere resposta calibrada ao contexto da venda e ao perfil do cliente. Biblioteca de objeções por setor construída e atualizada a cada negociação perdida — o sistema aprende com cada "não".</div>
+      </div>
+    </div>
+
+    <div class="flow-box">
+      <div class="flow-box-label">Fluxo completo do processo de venda</div>
+      <div class="flow-row"><div class="flow-icon">📅</div><div class="flow-text"><strong>Reunião agendada</strong> → Claude gera brief pré-call com pesquisa da empresa + roteiro de perguntas</div></div>
+      <div class="flow-row-arrow">↓</div>
+      <div class="flow-row"><div class="flow-icon">🎙️</div><div class="flow-text"><strong>Reunião acontece</strong> → Whisper transcreve a gravação</div></div>
+      <div class="flow-row flow-row-indent"><div class="flow-icon">🔍</div><div class="flow-text">Claude analisa transcrição: extrai dores, objeções, score de interesse</div></div>
+      <div class="flow-row flow-row-indent"><div class="flow-icon">📄</div><div class="flow-text">Claude gera proposta personalizada → enviada por email + WhatsApp</div></div>
+      <div class="flow-row flow-row-indent"><div class="flow-icon">📋</div><div class="flow-text">HubSpot: move lead para "Proposta Enviada"</div></div>
+      <div class="flow-row-arrow">↓ se fechou</div>
+      <div class="flow-row flow-row-indent"><div class="flow-icon">✅</div><div class="flow-text">HubSpot: move para "Cliente" + onboarding automático disparado (/novo-projeto + /instalar)</div></div>
+      <div class="flow-row-arrow">↓ se perdeu</div>
+      <div class="flow-row flow-row-indent"><div class="flow-icon">📊</div><div class="flow-text">Claude analisa motivo da perda + classifica para reengajamento em 30/60/90 dias</div></div>
+    </div>
+  </div>
+
+  <!-- FECHAMENTO -->
+  <div class="category c-fechamento" id="fechamento">
+    <div class="cat-header">
+      <div class="cat-dot" style="background:var(--fechamento)"></div>
+      <div class="cat-title" style="color:var(--fechamento)">Canal 2 — Sequência de Fechamento Multicanal</div>
+    </div>
+    <p class="cat-sub">14 dias de follow-up por email e WhatsApp intercalados — cada mensagem com ângulo diferente, cada canal com tom adequado. Automatizado, mas nunca parece automático.</p>
+
+    <div class="cards">
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/sequencia-fechamento</span></div>
+        <div class="card-title">Proposal Follow-up Sequence</div>
+        <div class="card-desc">Sequência multicanal pós-proposta de 14 dias com email e WhatsApp intercalados. Cada mensagem com ângulo diferente: case similar, quebra de objeção, urgência legítima e encerramento que preserva o relacionamento — mesmo que não feche agora.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/handler-objecoes</span></div>
+        <div class="card-title">Deal Stage Automator</div>
+        <div class="card-desc">Movimenta o lead no CRM conforme o comportamento: abriu o email da proposta, clicou no link, respondeu no WhatsApp. Cada ação dispara uma reação automática — o processo avança sem precisar de acompanhamento manual diário.</div>
+      </div>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-label">Sequência pós-proposta enviada — 14 dias</div>
+      <div class="tl-row"><div class="tl-day">Dia 0</div><div class="tl-text">📧 <strong>Email:</strong> proposta enviada + apresentação personalizada referenciando a call</div></div>
+      <div class="tl-row"><div class="tl-day">Dia 1</div><div class="tl-text">💬 <strong>WhatsApp:</strong> "Vi que você recebeu a proposta — tem alguma dúvida que posso esclarecer?"</div></div>
+      <div class="tl-row"><div class="tl-day">Dia 3</div><div class="tl-text">📧 <strong>Email:</strong> case de cliente do mesmo setor com resultado concreto e verificável</div></div>
+      <div class="tl-row"><div class="tl-day">Dia 5</div><div class="tl-text">💬 <strong>WhatsApp:</strong> quebra da objeção mais comum do setor, de forma direta e sem rodeios</div></div>
+      <div class="tl-row"><div class="tl-day">Dia 7</div><div class="tl-text">📧 <strong>Email:</strong> oferta com bônus ou urgência legítima baseada em contexto real</div></div>
+      <div class="tl-row"><div class="tl-day">Dia 10</div><div class="tl-text">💬 <strong>WhatsApp:</strong> "Vou fechar minha agenda para novos projetos — ainda faz sentido conversarmos?"</div></div>
+      <div class="tl-row"><div class="tl-day">Dia 14</div><div class="tl-text">📧 <strong>Email:</strong> encerramento que mantém o relacionamento — sem pressão, porta aberta para o futuro</div></div>
+    </div>
+  </div>
+
+  <!-- PROVA SOCIAL -->
+  <div class="category c-social" id="social">
+    <div class="cat-header">
+      <div class="cat-dot" style="background:var(--social)"></div>
+      <div class="cat-title" style="color:var(--social)">Canal 3 — Prova Social e Cases para Fechamento</div>
+    </div>
+    <p class="cat-sub">O ativo de marketing mais subestimado — especialmente em serviços onde a decisão é emocional e baseada em referência. Cases automáticos a cada projeto entregue.</p>
+
+    <div class="cards">
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/case-de-sucesso</span></div>
+        <div class="card-title">Case Study Writer — formato STAR</div>
+        <div class="card-desc">Recebe anotações brutas — situação, problema, solução e resultado — e gera o case estruturado em formato STAR: versão longa para PDF e blog (SEO e autoridade), versão curta para citação em anúncio e WhatsApp de fechamento. Um case, múltiplos usos.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/pedido-depoimento</span></div>
+        <div class="card-title">Testimonial Request Automator</div>
+        <div class="card-desc">Disparo automático 7 dias após o projeto ser marcado como entregue no CRM — no momento de maior satisfação do cliente. Mensagem personalizada com o resultado concreto daquele cliente específico, não um pedido genérico de avaliação.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/prova-social-personalizada</span></div>
+        <div class="card-title">Social Proof Personalizer</div>
+        <div class="card-desc">Dado o setor e o perfil do lead → seleciona o case mais relevante da biblioteca e o insere automaticamente na sequência de fechamento no momento certo. Lead de arquitetura recebe case de arquitetura — não um case genérico de "nossos clientes dizem".</div>
+      </div>
+    </div>
+
+    <div class="flow-box">
+      <div class="flow-box-label">Automação de geração de prova social</div>
+      <div class="flow-row"><div class="flow-icon">✅</div><div class="flow-text"><strong>Projeto entregue</strong> marcado no CRM</div></div>
+      <div class="flow-row-arrow">↓ 7 dias depois</div>
+      <div class="flow-row flow-row-indent"><div class="flow-icon">💬</div><div class="flow-text">WhatsApp com pedido de depoimento personalizado (/pedido-depoimento)</div></div>
+      <div class="flow-row-arrow">↓ se respondeu</div>
+      <div class="flow-row flow-row-indent"><div class="flow-icon">📝</div><div class="flow-text">Claude formata o depoimento e gera o case completo (/case-de-sucesso)</div></div>
+      <div class="flow-row flow-row-indent"><div class="flow-icon">📤</div><div class="flow-text">Case vai para: blog (SEO) + biblioteca de cases por setor</div></div>
+      <div class="flow-row flow-row-indent"><div class="flow-icon">🔁</div><div class="flow-text">/prova-social-personalizada: case disponível para inserção automática nos próximos fechamentos</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="page-divider"></div>
+
+<!-- ANÁLISE -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-eyebrow" style="color:var(--analise)">03 — Análise e Otimização</div>
+    <h2>O sistema que melhora<br>com o tempo</h2>
+    <p class="section-sub">Só faz sentido com dados reais — construir a partir do mês 2, quando há volume suficiente para identificar padrões.</p>
+  </div>
+
+  <div class="category c-analise" id="analise">
+    <div class="cards">
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/analisar-email</span></div>
+        <div class="card-title">Email Performance Analyzer</div>
+        <div class="card-desc">Relatório de abertura e clique por email → identifica os de baixa performance e sugere reescritas de subject line e corpo com argumentação de por que a nova versão deve funcionar melhor. Melhoria contínua sem precisar de especialista em email marketing.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/analisar-funil</span></div>
+        <div class="card-title">Funnel Performance Analyzer</div>
+        <div class="card-desc">Dados do CRM — leads por etapa, taxas de conversão, tempo médio em cada fase — → identifica o gargalo principal do funil e recomenda onde concentrar esforço no mês seguinte. Relatório mensal de saúde operacional do processo de vendas.</div>
+      </div>
+      <div class="card">
+        <div class="card-skills"><span class="skill-tag">/reengajamento</span></div>
+        <div class="card-title">Reengagement Campaign Creator</div>
+        <div class="card-desc">Identifica inativos por segmento (30, 60 ou 90 dias sem interação) e gera sequência de retorno personalizada por perfil de comportamento. Cada segmento recebe ângulo diferente — não é disparo genérico para toda a base de leads parados.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page-divider"></div>
+
+<!-- SKILLS MAP -->
+<div class="section" id="skills-map">
+  <div class="section-header">
+    <div class="section-eyebrow" style="color:var(--vendas)">04 — Skills</div>
+    <h2>Mapa completo das 16 skills</h2>
+    <p class="section-sub">Todas as skills a construir, organizadas por canal de atuação.</p>
+  </div>
+
+  <div class="skills-map">
+    <div class="skills-row">
+      <div class="skills-row-head" style="border-left:4px solid var(--email)">
+        <div class="phase-badge" style="background:rgba(59,130,246,0.13);color:var(--email)">Email</div>
+        <div class="skills-row-name">E-mail Marketing</div>
+        <div class="skills-row-count">5 skills</div>
+      </div>
+      <div class="skills-list">
+        <div class="skill-item"><div class="skill-item-name" style="color:var(--email)">/sequencia-email</div><div class="skill-item-desc">Persona + produto + objeções → sequência completa pronta para o ActiveCampaign</div></div>
+        <div class="skill-item"><div class="skill-item-name" style="color:var(--email)">/subject-line</div><div class="skill-item-desc">10 variações de assunto + preview text para teste A/B por email</div></div>
+        <div class="skill-item"><div class="skill-item-name" style="color:var(--email)">/newsletter-semanal</div><div class="skill-item-desc">Lista de links/temas → email completo da semana formatado e pronto</div></div>
+        <div class="skill-item"><div class="skill-item-name" style="color:var(--email)">/analisar-email</div><div class="skill-item-desc">Taxa de abertura/clique → reescritas dos emails com baixa performance</div></div>
+        <div class="skill-item"><div class="skill-item-name" style="color:var(--email)">/reengajamento</div><div class="skill-item-desc">Inativos por segmento → sequência de retorno personalizada por perfil</div></div>
+      </div>
+    </div>
+
+    <div class="skills-row">
+      <div class="skills-row-head" style="border-left:4px solid var(--whatsapp)">
+        <div class="phase-badge" style="background:rgba(16,185,129,0.13);color:var(--whatsapp)">WhatsApp</div>
+        <div class="skills-row-name">WhatsApp e Conversação</div>
+        <div class="skills-row-count">3 skills</div>
+      </div>
+      <div class="skills-list">
+        <div class="skill-item"><div class="skill-item-name" style="color:var(--whatsapp)">/qualificador-whatsapp</div><div class="skill-item-desc">5 perguntas adaptativas → classifica lead + gera resumo para vendedor</div></div>
+        <div class="skill-item"><div class="skill-item-name" style="color:var(--whatsapp)">/lead-scorer</div><div class="skill-item-desc">Respostas da qualificação → score numérico + próximo passo recomendado</div></div>
+        <div class="skill-item"><div class="skill-item-name" style="color:var(--whatsapp)">/copy-whatsapp</div><div class="skill-item-desc">Mensagens curtas por etapa: boas-vindas, nutrição, urgência, encerramento</div></div>
+      </div>
+    </div>
+
+    <div class="skills-row">
+      <div class="skills-row-head" style="border-left:4px solid var(--vendas)">
+        <div class="phase-badge" style="background:rgba(139,92,246,0.13);color:var(--vendas)">Vendas</div>
+        <div class="skills-row-name">Processo de Vendas com IA</div>
+        <div class="skills-row-count">5 skills</div>
+      </div>
+      <div class="skills-list">
+        <div class="skill-item"><div class="skill-item-name" style="color:var(--vendas)">/brief-pre-call</div><div class="skill-item-desc">Site/CNPJ → pesquisa da empresa + roteiro de perguntas para a reunião</div></div>
+        <div class="skill-item"><div class="skill-item-name" style="color:var(--vendas)">/analisar-reuniao</div><div class="skill-item-desc">Transcrição → dores + objeções + score de interesse + próximo passo</div></div>
+        <div class="skill-item"><div class="skill-item-name" style="color:var(--vendas)">/proposta-comercial</div><div class="skill-item-desc">Brief da reunião → proposta personalizada em HTML/PDF em 5 minutos</div></div>
+        <div class="skill-item"><div class="skill-item-name" style="color:var(--vendas)">/follow-up-reuniao</div><div class="skill-item-desc">Contexto da call → mensagem de acompanhamento personalizada por canal</div></div>
+        <div class="skill-item"><div class="skill-item-name" style="color:var(--vendas)">/handler-objecoes</div><div class="skill-item-desc">Objeção específica → resposta calibrada ao contexto da venda</div></div>
+      </div>
+    </div>
+
+    <div class="skills-row">
+      <div class="skills-row-head" style="border-left:4px solid var(--fechamento)">
+        <div class="phase-badge" style="background:rgba(239,68,68,0.13);color:var(--fechamento)">Fechamento</div>
+        <div class="skills-row-name">Sequência de Fechamento</div>
+        <div class="skills-row-count">1 skill</div>
+      </div>
+      <div class="skills-list">
+        <div class="skill-item"><div class="skill-item-name" style="color:var(--fechamento)">/sequencia-fechamento</div><div class="skill-item-desc">Sequência multicanal pós-proposta de 14 dias — email + WhatsApp intercalados com ângulos diferentes</div></div>
+      </div>
+    </div>
+
+    <div class="skills-row">
+      <div class="skills-row-head" style="border-left:4px solid var(--social)">
+        <div class="phase-badge" style="background:rgba(245,158,11,0.13);color:var(--social)">Prova Social</div>
+        <div class="skills-row-name">Cases e Depoimentos</div>
+        <div class="skills-row-count">3 skills</div>
+      </div>
+      <div class="skills-list">
+        <div class="skill-item"><div class="skill-item-name" style="color:var(--social)">/case-de-sucesso</div><div class="skill-item-desc">Anotações brutas → case STAR: versão longa (blog/PDF) + curta (anúncio/WhatsApp)</div></div>
+        <div class="skill-item"><div class="skill-item-name" style="color:var(--social)">/pedido-depoimento</div><div class="skill-item-desc">Disparo automático de solicitação personalizada 7 dias pós-entrega</div></div>
+        <div class="skill-item"><div class="skill-item-name" style="color:var(--social)">/prova-social-personalizada</div><div class="skill-item-desc">Setor do lead → seleciona o case mais relevante para inserir no fechamento</div></div>
+      </div>
+    </div>
+
+    <div class="skills-row">
+      <div class="skills-row-head" style="border-left:4px solid var(--analise)">
+        <div class="phase-badge" style="background:rgba(236,72,153,0.13);color:var(--analise)">Análise</div>
+        <div class="skills-row-name">Análise e Otimização</div>
+        <div class="skills-row-count">2 skills</div>
+      </div>
+      <div class="skills-list">
+        <div class="skill-item"><div class="skill-item-name" style="color:var(--analise)">/analisar-funil</div><div class="skill-item-desc">Dados do CRM → gargalo principal + recomendações mensais de onde otimizar</div></div>
+        <div class="skill-item"><div class="skill-item-name" style="color:var(--analise)">/analisar-email</div><div class="skill-item-desc">Performance por email → reescritas sugeridas para aumentar abertura e clique</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page-divider"></div>
+
+<!-- QUICK START -->
+<div class="section" id="quickstart">
+  <div class="section-header">
+    <div class="section-eyebrow" style="color:var(--whatsapp)">05 — Começar</div>
+    <h2>Por onde começar amanhã</h2>
+    <p class="section-sub">4 passos concretos em ordem de execução — não avançar sem o anterior funcionando.</p>
+  </div>
+
+  <div class="qs-grid">
+    <div class="qs-card">
+      <div class="qs-num" style="color:var(--email)">01</div>
+      <div class="qs-when">Hoje</div>
+      <div class="qs-action">Decidir a plataforma de email</div>
+      <div class="qs-detail">ActiveCampaign tem melhor automação comportamental. RD Station tem suporte em PT-BR e é mais comum no mercado nacional. Essa escolha define a arquitetura de tudo que vem depois.</div>
+    </div>
+    <div class="qs-card">
+      <div class="qs-num" style="color:var(--email)">02</div>
+      <div class="qs-when">Esta semana</div>
+      <div class="qs-action">Criar o lead magnet e subir o formulário</div>
+      <div class="qs-detail">Usar /carrossel para gerar o PDF do lead magnet. Instalar formulário conectado ao ActiveCampaign. Sem entrada no funil, o resto não tem utilidade.</div>
+    </div>
+    <div class="qs-card">
+      <div class="qs-num" style="color:var(--whatsapp)">03</div>
+      <div class="qs-when">Próxima semana</div>
+      <div class="qs-action">Rodar /sequencia-email e ativar no ActiveCampaign</div>
+      <div class="qs-detail">Com o briefing do primeiro cliente, gerar a sequência de boas-vindas de 6 emails. Primeiro lead que entrar já recebe automaticamente — sem nenhuma ação manual.</div>
+    </div>
+    <div class="qs-card">
+      <div class="qs-num" style="color:var(--vendas)">04</div>
+      <div class="qs-when">Semana 3</div>
+      <div class="qs-action">Configurar Z-API e ativar qualificação no WhatsApp</div>
+      <div class="qs-detail">Com email rodando, adicionar WhatsApp como canal de qualificação. Leads quentes chegarão com reunião já agendada — triagem feita pela IA, vendedor só fala com quem está pronto.</div>
+    </div>
+  </div>
+
+  <div style="background:var(--surface);border:1px solid var(--border2);border-radius:14px;padding:28px 32px;margin-top:24px;display:flex;align-items:flex-start;gap:20px;">
+    <div style="font-size:26px;flex-shrink:0;">💡</div>
+    <div>
+      <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:6px;">O resto segue conforme os leads começam a entrar</div>
+      <div style="font-size:13px;color:var(--muted2);line-height:1.65;">Construir infraestrutura sem tráfego é desperdício. O Módulo de Marketing precisa estar alimentando o meio antes de otimizar o fundo. Processo de vendas, prova social e análise só ganham força quando há volume real passando pelo email e pelo WhatsApp.</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <strong>Automa Labs</strong> — Gerador de Oportunidades &nbsp;·&nbsp; 2026
+</footer>
+
+</body>
+</html>
